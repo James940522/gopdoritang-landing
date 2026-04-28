@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #24140c;
+  --color-bg: #24140c;
+  --color-bg-soft: #2b1810;
+  --color-bg-warm: #7e5e4e;
+  --color-card: #ffffff;
+
+  --color-cream: #feeab4;
+  --color-brand: #feeab4;
+  --color-orange: #ff9e00;
+  --color-tan: #c4886a;
+  --color-mocha: #7e5e4e;
+  --color-mocha-light: #e0c3b4;
+
+  --color-graph-cream: #feeab4;
+  --color-graph-brown: #553424;
+  --color-graph-tan: #c4886a;
+  --color-graph-rust: #6c2f10;
+  --color-graph-copper: #b55d32;
+  --color-graph-mocha: #7e5e4e;
+
+  --color-strike: #b2a199;
+  --color-line: #7e5e4e;
+
+  --font-serif: "Noto Serif KR", "Gowun Batang", serif;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-tantan: "Jua", "Noto Sans KR", system-ui, sans-serif;
+  --font-batang: "Gowun Batang", "Noto Serif KR", serif;
+  --font-handwrite: "Gowun Dodum", "Noto Sans KR", cursive;
+
+  --radius-card: 10px;
+  --radius-pill: 9999px;
+
+  --shadow-soft: 0 8px 24px -8px rgba(0, 0, 0, 0.25);
+  --shadow-card: 0 12px 32px -12px rgba(0, 0, 0, 0.35);
+  --shadow-review: 0 0 14px rgba(0, 0, 0, 0.35);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+  }
+}
+
+@layer utilities {
+  .stamp-rotate {
+    animation: stamp-spin 14s linear infinite;
+  }
+
+  @keyframes stamp-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .arrow-bounce {
+    animation: arrow-bounce 1.6s ease-in-out infinite;
+  }
+
+  @keyframes arrow-bounce {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translateY(8px);
+      opacity: 1;
+    }
+  }
+
+  .blink-zero {
+    animation: blink-zero 1.6s ease-in-out infinite;
+  }
+
+  @keyframes blink-zero {
+    0%, 100% {
+      opacity: 1;
+      text-shadow: 0 0 0 currentColor;
+    }
+    50% {
+      opacity: 0.55;
+      text-shadow: 0 0 18px currentColor;
+    }
+  }
+
+  .marquee-track {
+    animation: marquee 24s linear infinite;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .underline-grow {
+    background-image: linear-gradient(var(--color-cream), var(--color-cream));
+    background-repeat: no-repeat;
+    background-position: 0 90%;
+    background-size: 100% 0.45em;
+    padding-bottom: 0.05em;
+    animation: underline-grow 1.4s 0.4s ease-out both;
+  }
+
+  @keyframes underline-grow {
+    from {
+      background-size: 0% 0.45em;
+    }
+    to {
+      background-size: 100% 0.45em;
+    }
+  }
+
+  .stamp-slam {
+    animation: stamp-slam 0.9s ease-out 0.2s both;
+    transform-origin: center;
+  }
+
+  @keyframes stamp-slam {
+    0% {
+      opacity: 0;
+      transform: scale(2.6) rotate(-12deg);
+      filter: blur(6px);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(0.92) rotate(-7deg);
+      filter: blur(0);
+    }
+    80% {
+      transform: scale(1.04) rotate(-13deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(-12.58deg);
+    }
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+}
