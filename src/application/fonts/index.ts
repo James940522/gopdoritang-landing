@@ -4,41 +4,56 @@ import {
   Jua,
   Gowun_Batang,
   Gowun_Dodum,
-} from "next/font/google";
+  Black_Han_Sans,
+} from 'next/font/google';
+import localFont from 'next/font/local';
+
+export const polSensibility = localFont({
+  src: '../../../public/font/Griun_PolSensibility-Rg.ttf',
+  variable: '--font-pol-sensibility',
+  display: 'swap',
+});
 
 export const notoSansKr = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-  variable: "--font-noto-sans-kr",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-noto-sans-kr',
+  display: 'swap',
 });
 
 export const notoSerifKr = Noto_Serif_KR({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-  variable: "--font-noto-serif-kr",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-noto-serif-kr',
+  display: 'swap',
 });
 
 export const jua = Jua({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-jua",
-  display: "swap",
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-jua',
+  display: 'swap',
 });
 
 export const gowunBatang = Gowun_Batang({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-gowun-batang",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-gowun-batang',
+  display: 'swap',
 });
 
 export const gowunDodum = Gowun_Dodum({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-gowun-dodum",
-  display: "swap",
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-gowun-dodum',
+  display: 'swap',
+});
+
+export const blackHanSans = Black_Han_Sans({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-black-han-sans',
+  display: 'swap',
 });
 
 export const fontVariables = [
@@ -47,4 +62,6 @@ export const fontVariables = [
   jua.variable,
   gowunBatang.variable,
   gowunDodum.variable,
-].join(" ");
+  blackHanSans.variable,
+  polSensibility.variable,
+].join(' ');

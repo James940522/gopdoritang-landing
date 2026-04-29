@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { processSteps } from "@domains/landing/model";
+import Image from 'next/image';
+import { processSteps } from '@domains/landing/model';
 
 const CARD_TOPS = [226, 342, 458, 574, 690];
 const ARROW_TOPS = [317, 434, 551, 668];
@@ -13,12 +13,12 @@ export function ProcessSection() {
       <p
         className="absolute z-10 text-center font-[family-name:var(--font-noto-sans-kr)] text-white"
         style={{
-          left: "50%",
+          left: '50%',
           top: 58,
-          transform: "translateX(-50%)",
+          transform: 'translateX(-50%)',
           fontSize: 30,
-          lineHeight: "53px",
-          whiteSpace: "nowrap",
+          lineHeight: '53px',
+          whiteSpace: 'nowrap',
         }}
       >
         저희만 따라오세요
@@ -26,12 +26,12 @@ export function ProcessSection() {
       <h2
         className="absolute z-10 text-center font-[family-name:var(--font-noto-sans-kr)] font-bold text-white"
         style={{
-          left: "50%",
+          left: '50%',
           top: 104,
-          transform: "translateX(-50%)",
+          transform: 'translateX(-50%)',
           fontSize: 35,
-          lineHeight: "53px",
-          whiteSpace: "nowrap",
+          lineHeight: '53px',
+          whiteSpace: 'nowrap',
         }}
       >
         심곱도리탕 창업절차
@@ -46,7 +46,7 @@ export function ProcessSection() {
               top: CARD_TOPS[i],
               width: 291,
               height: 84,
-              background: step.highlight ? "#feeab4" : "#ffffff",
+              background: step.highlight ? '#feeab4' : '#ffffff',
             }}
           >
             <div className="ml-[28px] grid h-full place-items-center" style={{ width: 50 }}>
@@ -61,8 +61,8 @@ export function ProcessSection() {
               className="ml-[10px] font-[family-name:var(--font-noto-sans-kr)] font-bold"
               style={{
                 fontSize: 20,
-                lineHeight: "53px",
-                color: step.highlight ? "#24140c" : "#7e5e4e",
+                lineHeight: '53px',
+                color: step.highlight ? '#24140c' : '#7e5e4e',
               }}
             >
               {step.title}
@@ -74,15 +74,15 @@ export function ProcessSection() {
             style={{
               left: 269,
               top: CARD_TOPS[i] - 17,
-              background: step.highlight ? "#ff9e00" : "#feeab4",
-              boxShadow: "0 0 6.5px rgba(36,20,12,0.3)",
+              background: step.highlight ? '#ff9e00' : '#feeab4',
+              boxShadow: '0 0 6.5px rgba(36,20,12,0.3)',
             }}
           >
             <span
               className="font-[family-name:var(--font-noto-sans-kr)] font-bold"
               style={{
                 fontSize: 15,
-                color: step.highlight ? "#ffffff" : "#24140c",
+                color: step.highlight ? '#ffffff' : '#24140c',
               }}
             >
               STEP {step.step}
@@ -95,23 +95,13 @@ export function ProcessSection() {
                 className="absolute z-10"
                 style={{ left: 178.5, top: ARROW_TOPS[i] - 7, width: 28, height: 9 }}
               >
-                <Image
-                  src="/images/sections/step-arrow-up.svg"
-                  alt=""
-                  fill
-                  sizes="28px"
-                />
+                <Image src="/images/sections/step-arrow-up.svg" alt="" fill sizes="28px" />
               </div>
               <div
                 className="absolute z-10"
                 style={{ left: 178, top: ARROW_TOPS[i], width: 28, height: 9 }}
               >
-                <Image
-                  src="/images/sections/step-arrow-down.svg"
-                  alt=""
-                  fill
-                  sizes="28px"
-                />
+                <Image src="/images/sections/step-arrow-down.svg" alt="" fill sizes="28px" />
               </div>
             </>
           ) : null}

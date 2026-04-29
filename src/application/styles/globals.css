@@ -1,164 +1,215 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --color-ink: #24140c;
-  --color-bg: #24140c;
-  --color-bg-soft: #2b1810;
-  --color-bg-warm: #7e5e4e;
-  --color-card: #ffffff;
+  /* ============================================================
+   * Tier 1. Color Primitives (50 → 900 scales)
+   * ------------------------------------------------------------
+   * 직접 사용하기보다 시맨틱 토큰의 소스로 사용.
+   * Tailwind utility 예: bg-wood-500, text-beige-300
+   * ============================================================ */
 
-  --color-cream: #feeab4;
-  --color-brand: #feeab4;
-  --color-orange: #ff9e00;
-  --color-tan: #c4886a;
-  --color-mocha: #7e5e4e;
-  --color-mocha-light: #e0c3b4;
+  /* Surface — 따뜻한 다크 베이스 (블랙 ↔ 우드 다크) */
+  --color-surface-50: #f5ebe0;
+  --color-surface-100: #e2d0bc;
+  --color-surface-200: #b0967a;
+  --color-surface-300: #7e5e4e;
+  --color-surface-400: #5a3f30;
+  --color-surface-500: #33271f;
+  --color-surface-600: #271f19;
+  --color-surface-700: #1e1813;
+  --color-surface-800: #15110e;
+  --color-surface-900: #0f0c0a;
 
-  --color-graph-cream: #feeab4;
-  --color-graph-brown: #553424;
-  --color-graph-tan: #c4886a;
-  --color-graph-rust: #6c2f10;
-  --color-graph-copper: #b55d32;
-  --color-graph-mocha: #7e5e4e;
+  /* Wood — 브랜드 우드(나무) 톤 */
+  --color-wood-50: #fbf3ea;
+  --color-wood-100: #f1dfc8;
+  --color-wood-200: #e0c09c;
+  --color-wood-300: #c99d70;
+  --color-wood-400: #b47c50;
+  --color-wood-500: #8b5a2b;
+  --color-wood-600: #6f4520;
+  --color-wood-700: #5a3a1e;
+  --color-wood-800: #3d2613;
+  --color-wood-900: #271709;
 
-  --color-strike: #b2a199;
-  --color-line: #7e5e4e;
+  /* Beige — 텍스트/베이스 톤 */
+  --color-beige-50: #faf4e4;
+  --color-beige-100: #f5e9c9;
+  --color-beige-200: #efdba8;
+  --color-beige-300: #e8d5b0;
+  --color-beige-400: #d8be8b;
+  --color-beige-500: #c9b186;
+  --color-beige-600: #a8916a;
+  --color-beige-700: #877450;
+  --color-beige-800: #5c4f37;
+  --color-beige-900: #3a3122;
 
-  --font-serif: "Noto Serif KR", "Gowun Batang", serif;
-  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif;
-  --font-tantan: "Jua", "Noto Sans KR", system-ui, sans-serif;
-  --font-batang: "Gowun Batang", "Noto Serif KR", serif;
-  --font-handwrite: "Gowun Dodum", "Noto Sans KR", cursive;
+  /* Red — 포인트/CTA */
+  --color-red-50: #fdecee;
+  --color-red-100: #f8c5cc;
+  --color-red-200: #f19ca6;
+  --color-red-300: #e96e7e;
+  --color-red-400: #e04f61;
+  --color-red-500: #d7263d;
+  --color-red-600: #b11f33;
+  --color-red-700: #8e1b2c;
+  --color-red-800: #6a1320;
+  --color-red-900: #49080f;
 
-  --radius-card: 10px;
-  --radius-pill: 9999px;
+  /* ============================================================
+   * Tier 2. Semantic Tokens
+   * ------------------------------------------------------------
+   * 컴포넌트는 가능하면 시맨틱 토큰을 우선 사용.
+   * Tailwind utility 예: bg-background, text-foreground, bg-primary
+   * ============================================================ */
 
-  --shadow-soft: 0 8px 24px -8px rgba(0, 0, 0, 0.25);
-  --shadow-card: 0 12px 32px -12px rgba(0, 0, 0, 0.35);
-  --shadow-review: 0 0 14px rgba(0, 0, 0, 0.35);
+  --color-background: var(--color-surface-800);
+  --color-background-elevated: var(--color-surface-700);
+  --color-background-card: var(--color-surface-600);
+  --color-background-card-strong: var(--color-surface-500);
+
+  --color-foreground: var(--color-beige-300);
+  --color-foreground-strong: var(--color-beige-100);
+  --color-foreground-muted: var(--color-beige-500);
+  --color-foreground-subtle: var(--color-beige-700);
+
+  --color-primary: var(--color-wood-500);
+  --color-primary-hover: var(--color-wood-400);
+  --color-primary-active: var(--color-wood-700);
+  --color-primary-foreground: var(--color-beige-50);
+
+  --color-accent: var(--color-red-500);
+  --color-accent-hover: var(--color-red-400);
+  --color-accent-active: var(--color-red-700);
+  --color-accent-foreground: var(--color-beige-50);
+
+  --color-border: var(--color-surface-500);
+  --color-border-strong: var(--color-wood-700);
+  --color-ring: var(--color-wood-500);
+
+  /* ============================================================
+   * Tier 3. Aliases (짧은 별칭, 후방 호환)
+   * ------------------------------------------------------------
+   * 기존 코드에서 쓰던 짧은 이름을 유지.
+   * 신규 코드는 가능하면 Tier 2 시맨틱 토큰 사용 권장.
+   * ============================================================ */
+
+  --color-ink: var(--color-surface-900);
+  --color-bg: var(--color-surface-800);
+  --color-bg-elevated: var(--color-surface-700);
+  --color-surface: var(--color-surface-600);
+  --color-surface-strong: var(--color-surface-500);
+  --color-line: var(--color-surface-500);
+
+  --color-cream: var(--color-beige-100);
+  --color-beige: var(--color-beige-300);
+  --color-beige-soft: var(--color-beige-500);
+  --color-muted: var(--color-beige-500);
+
+  --color-wood: var(--color-wood-500);
+  --color-wood-light: var(--color-wood-400);
+  --color-wood-dark: var(--color-wood-700);
+
+  --color-red: var(--color-red-500);
+  --color-red-soft: var(--color-red-400);
+  --color-red-deep: var(--color-red-700);
+
+  /* ============================================================
+   * Typography
+   * ============================================================ */
+
+  --font-sans:
+    'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', system-ui, sans-serif;
 }
 
 @layer base {
-  html {
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-size-adjust: 100%;
+    /* 한글이 글자 단위가 아니라 단어 단위로 끊기도록 */
+    word-break: keep-all;
+    /* 너무 긴 단어는 박스를 넘지 않게 보조 */
+    overflow-wrap: break-word;
+    /* 줄 길이를 균형 있게 맞춰주는 balance — 짧은 카피일수록 효과가 큼 */
+    text-wrap: balance;
   }
 
-  body {
-    background-color: var(--color-bg);
-    color: var(--color-cream);
-    font-family: var(--font-sans);
-    overscroll-behavior-y: none;
-  }
-
-  ::selection {
-    background-color: var(--color-cream);
-    color: var(--color-ink);
+  /* 짧은 헤딩 류는 줄간 길이를 균형 있게 잡아주는 balance 적용 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
   }
 }
 
 @layer utilities {
-  .stamp-rotate {
-    animation: stamp-spin 14s linear infinite;
+  .landing-shell {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 
-  @keyframes stamp-spin {
-    to {
-      transform: rotate(360deg);
-    }
+  .landing-container {
+    width: min(100% - 2rem, 1200px);
+    margin-inline: auto;
   }
 
-  .arrow-bounce {
-    animation: arrow-bounce 1.6s ease-in-out infinite;
+  .landing-header,
+  .landing-footer {
+    padding: 1rem 0;
+    background: var(--color-background-elevated);
+    border-block: 1px solid var(--color-border);
   }
 
-  @keyframes arrow-bounce {
-    0%, 100% {
-      transform: translateY(0);
-      opacity: 0.85;
-    }
-    50% {
-      transform: translateY(8px);
-      opacity: 1;
-    }
+  .landing-hero {
+    padding: 3rem 0 2rem;
   }
 
-  .blink-zero {
-    animation: blink-zero 1.6s ease-in-out infinite;
+  .landing-content {
+    padding: 0 0 3rem;
   }
 
-  @keyframes blink-zero {
-    0%, 100% {
-      opacity: 1;
-      text-shadow: 0 0 0 currentColor;
-    }
-    50% {
-      opacity: 0.55;
-      text-shadow: 0 0 18px currentColor;
-    }
+  .landing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .marquee-track {
-    animation: marquee 24s linear infinite;
+  .landing-card {
+    min-height: 160px;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-background-card);
+    color: var(--color-foreground);
+  }
+}
+
+@media (min-width: 768px) {
+  .landing-container {
+    width: min(100% - 3rem, 1200px);
   }
 
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
+  .landing-hero {
+    padding: 4rem 0 2.5rem;
   }
 
-  .underline-grow {
-    background-image: linear-gradient(var(--color-cream), var(--color-cream));
-    background-repeat: no-repeat;
-    background-position: 0 90%;
-    background-size: 100% 0.45em;
-    padding-bottom: 0.05em;
-    animation: underline-grow 1.4s 0.4s ease-out both;
+  .landing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  @keyframes underline-grow {
-    from {
-      background-size: 0% 0.45em;
-    }
-    to {
-      background-size: 100% 0.45em;
-    }
-  }
-
-  .stamp-slam {
-    animation: stamp-slam 0.9s ease-out 0.2s both;
-    transform-origin: center;
-  }
-
-  @keyframes stamp-slam {
-    0% {
-      opacity: 0;
-      transform: scale(2.6) rotate(-12deg);
-      filter: blur(6px);
-    }
-    60% {
-      opacity: 1;
-      transform: scale(0.92) rotate(-7deg);
-      filter: blur(0);
-    }
-    80% {
-      transform: scale(1.04) rotate(-13deg);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) rotate(-12.58deg);
-    }
-  }
-
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .hide-scrollbar {
-    scrollbar-width: none;
+@media (min-width: 1024px) {
+  .landing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

@@ -1,11 +1,11 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export function SiteHeader() {
   return (
     <header className="absolute inset-x-0 top-0 z-30 flex h-[57px] items-center justify-between bg-[#24140c] px-[17px]">
       <a href="/" aria-label="심곱도리탕 홈" className="block">
         <Image
-          src="/images/hero/logo.png"
+          src="/asset/etc/logo.png"
           alt="심곱도리탕"
           width={143}
           height={31}

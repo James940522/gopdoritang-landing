@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export function ProfitSection() {
   return (
@@ -6,10 +6,7 @@ export function ProfitSection() {
       className="relative isolate overflow-hidden bg-[#24140c]"
       style={{ width: 393, height: 852 }}
     >
-      <div
-        className="absolute z-0"
-        style={{ left: -51, top: -3, width: 558, height: 393 }}
-      >
+      <div className="absolute z-0" style={{ left: -51, top: -3, width: 558, height: 393 }}>
         <Image
           src="/images/sections/aron-visuals.png"
           alt=""
@@ -20,8 +17,7 @@ export function ProfitSection() {
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(180deg, rgba(36,20,12,0) 0%, #24140c 73%)",
+            background: 'linear-gradient(180deg, rgba(36,20,12,0) 0%, #24140c 73%)',
           }}
         />
       </div>
@@ -34,16 +30,15 @@ export function ProfitSection() {
       <h2
         className="absolute z-20 text-center font-[family-name:var(--font-noto-serif-kr)] font-bold text-[#feeab4]"
         style={{
-          left: "50%",
+          left: '50%',
           top: 37,
-          transform: "translateX(-50%)",
+          transform: 'translateX(-50%)',
           fontSize: 45,
-          lineHeight: "61px",
-          whiteSpace: "nowrap",
+          lineHeight: '61px',
+          whiteSpace: 'nowrap',
         }}
       >
-        이익도{" "}
-        <span className="text-[#24140c]">확실하게</span>
+        이익도 <span className="text-[#24140c]">확실하게</span>
         <br />
         챙겨가세요
       </h2>
@@ -52,12 +47,12 @@ export function ProfitSection() {
         className="absolute z-20 flex flex-col items-stretch"
         style={{ left: 33, top: 256, width: 88 }}
       >
-        <div style={{ height: 134, background: "#feeab4" }} />
-        <div style={{ height: 294, background: "#553424" }} />
-        <div style={{ height: 15, background: "#c4886a" }} />
-        <div style={{ height: 85, background: "#6c2f10" }} />
-        <div style={{ height: 9, background: "#b55d32" }} />
-        <div style={{ height: 30, background: "#7e5e4e" }} />
+        <div style={{ height: 134, background: '#feeab4' }} />
+        <div style={{ height: 294, background: '#553424' }} />
+        <div style={{ height: 15, background: '#c4886a' }} />
+        <div style={{ height: 85, background: '#6c2f10' }} />
+        <div style={{ height: 9, background: '#b55d32' }} />
+        <div style={{ height: 30, background: '#7e5e4e' }} />
       </div>
 
       <div className="absolute z-20" style={{ left: 121, top: 308, width: 49.5, height: 10 }}>
@@ -71,13 +66,13 @@ export function ProfitSection() {
       </p>
       <p
         className="absolute z-20 font-[family-name:var(--font-noto-sans-kr)] text-[#feeab4]"
-        style={{ left: 176.5, top: 333, fontSize: 28, letterSpacing: "-1.68px" }}
+        style={{ left: 176.5, top: 333, fontSize: 28, letterSpacing: '-1.68px' }}
       >
         12,000,000원
       </p>
       <p
         className="absolute z-20 font-[family-name:var(--font-noto-sans-kr)] font-bold text-[#feeab4]"
-        style={{ left: 267.5, top: 300, fontSize: 25, letterSpacing: "-1.5px" }}
+        style={{ left: 267.5, top: 300, fontSize: 25, letterSpacing: '-1.5px' }}
       >
         11.1%
       </p>
@@ -117,10 +112,7 @@ export function ProfitSection() {
       <div className="absolute z-20" style={{ left: 121, top: 742, width: 65, height: 2 }}>
         <Image src="/images/sections/profit-arrow-3.svg" alt="" fill sizes="65px" />
       </div>
-      <div
-        className="absolute z-20"
-        style={{ left: 183, top: 737, width: 10, height: 10 }}
-      >
+      <div className="absolute z-20" style={{ left: 183, top: 737, width: 10, height: 10 }}>
         <Image src="/images/sections/profit-dot.svg" alt="" fill sizes="10px" />
       </div>
       <p
@@ -139,10 +131,7 @@ export function ProfitSection() {
       <div className="absolute z-20" style={{ left: 121, top: 788, width: 65, height: 2 }}>
         <Image src="/images/sections/profit-arrow-4.svg" alt="" fill sizes="65px" />
       </div>
-      <div
-        className="absolute z-20"
-        style={{ left: 183, top: 783, width: 10, height: 10 }}
-      >
+      <div className="absolute z-20" style={{ left: 183, top: 783, width: 10, height: 10 }}>
         <Image src="/images/sections/profit-dot.svg" alt="" fill sizes="10px" />
       </div>
       <p
@@ -161,10 +150,7 @@ export function ProfitSection() {
       <div className="absolute z-20" style={{ left: 121, top: 808, width: 65, height: 2 }}>
         <Image src="/images/sections/profit-arrow-4.svg" alt="" fill sizes="65px" />
       </div>
-      <div
-        className="absolute z-20"
-        style={{ left: 183, top: 803, width: 10, height: 10 }}
-      >
+      <div className="absolute z-20" style={{ left: 183, top: 803, width: 10, height: 10 }}>
         <Image src="/images/sections/profit-dot.svg" alt="" fill sizes="10px" />
       </div>
       <p

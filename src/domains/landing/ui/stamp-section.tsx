@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export function StampSection() {
   return (
@@ -24,12 +24,12 @@ export function StampSection() {
       <h2
         className="absolute z-20 text-center font-[family-name:var(--font-jua)] text-[#feeab4]"
         style={{
-          left: "50%",
+          left: '50%',
           top: 129,
-          transform: "translateX(-50%)",
+          transform: 'translateX(-50%)',
           fontSize: 41,
-          lineHeight: "66px",
-          whiteSpace: "nowrap",
+          lineHeight: '66px',
+          whiteSpace: 'nowrap',
         }}
       >
         배달 창업
@@ -39,39 +39,39 @@ export function StampSection() {
 
       <p
         className="absolute z-20 font-[family-name:var(--font-gowun-dodum)] text-[#7e5e4e]"
-        style={{ left: 174, top: 315, fontSize: 26, lineHeight: "36px" }}
+        style={{ left: 174, top: 315, fontSize: 26, lineHeight: '36px' }}
       >
         첫째
       </p>
       <p
         className="absolute z-20 font-[family-name:var(--font-noto-sans-kr)] font-bold text-[#feeab4]"
-        style={{ left: 86, top: 361, fontSize: 26, lineHeight: "36px" }}
+        style={{ left: 86, top: 361, fontSize: 26, lineHeight: '36px' }}
       >
         비효율적인 조리 시간
       </p>
 
       <p
         className="absolute z-20 font-[family-name:var(--font-gowun-dodum)] text-[#7e5e4e]"
-        style={{ left: 174, top: 448, fontSize: 26, lineHeight: "36px" }}
+        style={{ left: 174, top: 448, fontSize: 26, lineHeight: '36px' }}
       >
         둘째
       </p>
       <p
         className="absolute z-20 font-[family-name:var(--font-noto-sans-kr)] font-bold text-[#feeab4]"
-        style={{ left: 136, top: 494, fontSize: 26, lineHeight: "36px" }}
+        style={{ left: 136, top: 494, fontSize: 26, lineHeight: '36px' }}
       >
         높은 인건비
       </p>
 
       <p
         className="absolute z-20 font-[family-name:var(--font-gowun-dodum)] text-[#7e5e4e]"
-        style={{ left: 174, top: 581, fontSize: 26, lineHeight: "36px" }}
+        style={{ left: 174, top: 581, fontSize: 26, lineHeight: '36px' }}
       >
         셋째
       </p>
       <p
         className="absolute z-20 font-[family-name:var(--font-noto-sans-kr)] font-bold text-[#feeab4]"
-        style={{ left: 136, top: 627, fontSize: 26, lineHeight: "36px" }}
+        style={{ left: 136, top: 627, fontSize: 26, lineHeight: '36px' }}
       >
         복잡한 메뉴
       </p>
@@ -79,9 +79,9 @@ export function StampSection() {
       <div
         className="absolute z-30 stamp-slam"
         style={{
-          left: "50%",
+          left: '50%',
           top: 295,
-          transform: "translateX(-50%)",
+          transform: 'translateX(-50%)',
           width: 542,
           height: 320,
         }}
@@ -89,45 +89,45 @@ export function StampSection() {
         <div
           className="absolute"
           style={{
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%) rotate(-12.58deg)",
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%) rotate(-12.58deg)',
             width: 508,
             height: 213,
-            background: "#ebb65f",
+            background: '#ebb65f',
           }}
         />
         <div
           className="absolute"
           style={{
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%) rotate(-12.58deg)",
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%) rotate(-12.58deg)',
             width: 495,
             height: 199,
-            border: "2px solid #24140c",
+            border: '2px solid #24140c',
           }}
         />
         <div
           className="absolute"
           style={{
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%) rotate(-12.58deg)",
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%) rotate(-12.58deg)',
             width: 485,
             height: 188,
-            border: "1px solid #24140c",
+            border: '1px solid #24140c',
           }}
         />
         <div
           className="absolute text-center font-[family-name:var(--font-noto-serif-kr)] font-bold text-[#24140c]"
           style={{
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%) rotate(-12.58deg)",
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%) rotate(-12.58deg)',
             fontSize: 51,
-            lineHeight: "63px",
-            whiteSpace: "nowrap",
+            lineHeight: '63px',
+            whiteSpace: 'nowrap',
           }}
         >
           심 곱도리탕은

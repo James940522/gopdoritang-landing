@@ -1,5 +1,5 @@
-import "@application/styles/globals.css";
-import { fontVariables, siteMetadata, siteViewport } from "@application/index";
+import '@application/styles/globals.css';
+import { fontVariables, siteMetadata, siteViewport } from '@application/index';
 
 export const metadata = siteMetadata;
 export const viewport = siteViewport;

@@ -1,1 +1,1 @@
-export { LandingPage } from "./ui";
+export { LandingPage } from './ui';
