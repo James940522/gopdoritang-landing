@@ -43,21 +43,27 @@ export function HeroSection() {
       >
         {/* 모바일: 2줄 */}
         <div className="sm:hidden leading-[1.05]" style={{ WebkitTextStroke: '2px #FFD9A0' }}>
-          <p className="font-(family-name:--font-pol-sensibility) tracking-tight text-[#FFD9A0]
-                        text-[15vw]">
+          <p
+            className="font-(family-name:--font-pol-sensibility) tracking-tight text-[#FFD9A0]
+                        text-[15vw]"
+          >
             프리미엄
           </p>
-          <p className="font-(family-name:--font-pol-sensibility) tracking-tight text-[#FFD9A0]
-                        text-[15vw]">
+          <p
+            className="font-(family-name:--font-pol-sensibility) tracking-tight text-[#FFD9A0]
+                        text-[15vw]"
+          >
             곱도리탕의
           </p>
         </div>
 
         {/* 태블릿+: 1줄 */}
-        <p className="hidden sm:block font-(family-name:--font-pol-sensibility) tracking-tight text-[#FFD9A0]
+        <p
+          className="hidden sm:block font-(family-name:--font-pol-sensibility) tracking-tight text-[#FFD9A0]
                       sm:text-[10.5vw]
                       lg:text-[9vw]"
-           style={{ WebkitTextStroke: '2.5px #FFD9A0' }}>
+          style={{ WebkitTextStroke: '2.5px #FFD9A0' }}
+        >
           프리미엄 곱도리탕의
         </p>
       </motion.div>
@@ -162,8 +168,10 @@ export function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 1.0 }}
       >
-        <p className="font-(family-name:--font-noto-sans-kr) text-center leading-relaxed text-white/40
-                      text-[11px] sm:text-xs">
+        <p
+          className="font-(family-name:--font-noto-sans-kr) text-center leading-relaxed text-white/40
+                      text-[11px] sm:text-xs"
+        >
           매출 구조와 운영 효율까지 설계된 배달 특화 곱도리탕 창업 브랜드
         </p>
         <div className="flex gap-3">

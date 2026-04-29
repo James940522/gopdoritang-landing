@@ -1,4 +1,9 @@
 export { brandStories, type BrandStoryBlock } from './brand-story';
+export {
+  monthlySales,
+  peakMonthlySale,
+  type MonthlySale,
+} from './monthly-sales';
 export { problems, type Problem } from './problems';
 export { strengths, type Strength } from './strengths';
 export { profitBars, type ProfitItem } from './profit';
