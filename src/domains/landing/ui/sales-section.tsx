@@ -8,10 +8,11 @@ import { monthlySales, peakMonthlySale } from '../model';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 // 차트 viewBox — 가로로 와이드하게 펼쳐 트로피 배경과 어우러지게
+// H를 키우고 PAD_Y를 줄여 라인이 더 가파르게 그려지도록
 const W = 1200;
-const H = 320;
+const H = 460;
 const PAD_X = 120;
-const PAD_Y = 80;
+const PAD_Y = 50;
 const innerW = W - PAD_X * 2;
 const innerH = H - PAD_Y * 2;
 
@@ -127,7 +128,7 @@ function MonthlyChart() {
       transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
       className="relative w-full"
     >
-      <div className="relative aspect-1200/320 w-full overflow-visible">
+      <div className="relative aspect-1200/460 w-full overflow-visible">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="absolute inset-0 h-full w-full overflow-visible"

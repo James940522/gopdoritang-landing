@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { SiteHeader } from './site-header';
 
 export function HeroSection() {
   return (
@@ -25,9 +24,6 @@ export function HeroSection() {
         style={{ zIndex: 1 }}
         aria-hidden
       />
-
-      {/* 헤더 */}
-      <SiteHeader />
 
       <h1 className="sr-only">심 곱도리탕 — 프리미엄 곱도리탕의 기준</h1>
 
