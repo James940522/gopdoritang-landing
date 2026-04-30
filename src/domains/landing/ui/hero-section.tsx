@@ -30,7 +30,7 @@ export function HeroSection() {
       {/* ── 상단 텍스트 "프리미엄 곱도리탕의" — 그릇 바로 위, z-10 ── */}
       <motion.div
         className="absolute inset-x-0 z-10 text-center leading-[0.88]
-                   top-[24%]
+                   top-[22%]
                    sm:top-[26%]
                    md:top-[27%]"
         initial={{ opacity: 0, y: -10 }}

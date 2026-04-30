@@ -1,9 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex h-[57px] items-center justify-between border-b border-white/5 bg-[#24140c]/85 px-[17px] backdrop-blur-md">
-      <a href="/" aria-label="심곱도리탕 홈" className="block">
+      <Link href="/" aria-label="심곱도리탕 홈" className="block">
         <Image
           src="/asset/etc/logo.png"
           alt="심곱도리탕"
@@ -12,7 +13,7 @@ export function SiteHeader() {
           priority
           className="h-[31px] w-auto"
         />
-      </a>
+      </Link>
       <button
         type="button"
         aria-label="메뉴 열기"
