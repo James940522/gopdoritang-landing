@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import type { MotionStyle, MotionValue } from 'framer-motion';
 import { profitStructureCards, type ProfitStructureCard } from '../model';
+import { AmbientTypeTicker } from './ambient-type-ticker';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -198,8 +199,26 @@ export function ProfitStructureSection() {
             'repeating-linear-gradient(90deg, transparent 0 44px, rgba(245,233,201,0.05) 44px 45px)',
         }}
       />
+      <AmbientTypeTicker
+        className="absolute inset-x-0 top-24 z-0 opacity-80 sm:top-28"
+        lines={[
+          {
+            text: 'FAST KITCHEN FLOW DESIGNED FOR DELIVERY',
+            direction: 'left',
+          },
+          {
+            text: 'SIMPLE MENU STRONGER OPERATIONS',
+            direction: 'right',
+            variant: 'outline',
+          },
+          {
+            text: 'PROFIT STRUCTURE BUILT INTO THE BRAND',
+            direction: 'left',
+          },
+        ]}
+      />
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">
         <AnimatedHeadline />
         <ScrollStack />
       </div>

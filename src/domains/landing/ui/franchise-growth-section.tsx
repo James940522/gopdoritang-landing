@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { branches, type Branch } from '../model';
+import { AmbientTypeTicker } from './ambient-type-ticker';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -135,8 +136,26 @@ export function FranchiseGrowthSection() {
         aria-hidden
         className="absolute inset-x-0 bottom-[214px] -z-10 h-12 -skew-y-2 bg-[var(--color-red-700)] sm:bottom-[252px]"
       />
+      <AmbientTypeTicker
+        className="absolute inset-x-0 top-16 z-0 opacity-90 sm:top-20"
+        lines={[
+          {
+            text: 'SIM GOPDORITANG FRANCHISE MOMENTUM',
+            direction: 'left',
+          },
+          {
+            text: 'OWNER-FIRST BRAND GROWTH',
+            direction: 'right',
+            variant: 'outline',
+          },
+          {
+            text: 'ONE MONTH TEN CONTRACTS',
+            direction: 'left',
+          },
+        ]}
+      />
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">
         <motion.header
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
