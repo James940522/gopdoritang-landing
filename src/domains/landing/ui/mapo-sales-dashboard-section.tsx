@@ -1,68 +1,133 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
 import { mapoMonthlySalesSummary, mapoSalesMetrics, mapoSalesTotal } from '../model';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const CHART_WIDTH = 760;
-const CHART_HEIGHT = 360;
-const CHART_PADDING_X = 72;
-const CHART_PADDING_TOP = 42;
-const CHART_PADDING_BOTTOM = 68;
+const CHART_WIDTH = 820;
+const CHART_HEIGHT = 390;
+const CHART_PADDING_X = 64;
+const CHART_PADDING_TOP = 52;
+const CHART_PADDING_BOTTOM = 78;
 const CHART_INNER_WIDTH = CHART_WIDTH - CHART_PADDING_X * 2;
 const CHART_INNER_HEIGHT = CHART_HEIGHT - CHART_PADDING_TOP - CHART_PADDING_BOTTOM;
 const maxSales = Math.max(...mapoMonthlySalesSummary.map((item) => item.totalSales));
-const minAov = Math.min(...mapoMonthlySalesSummary.map((item) => item.averageOrderValue));
-const maxAov = Math.max(...mapoMonthlySalesSummary.map((item) => item.averageOrderValue));
-const aovRange = maxAov - minAov || 1;
 
-const chartPoints = mapoMonthlySalesSummary.map((item, index) => {
-  const x = CHART_PADDING_X + (CHART_INNER_WIDTH * index) / (mapoMonthlySalesSummary.length - 1);
-  const aovRatio = (item.averageOrderValue - minAov) / aovRange;
-  const y = CHART_PADDING_TOP + CHART_INNER_HEIGHT * (1 - aovRatio);
+const monthlySalesLinePoints = mapoMonthlySalesSummary.map((item, index) => {
+  const slotWidth = CHART_INNER_WIDTH / mapoMonthlySalesSummary.length;
+  const x = CHART_PADDING_X + slotWidth * index + slotWidth / 2;
+  const totalHeight = (item.totalSales / maxSales) * CHART_INNER_HEIGHT;
+  const y = CHART_PADDING_TOP + CHART_INNER_HEIGHT - totalHeight + 16;
 
-  return { ...item, x, y };
+  return { x, y };
 });
 
-const aovPath = chartPoints
+const monthlySalesPath = monthlySalesLinePoints
   .map((point, index) => (index === 0 ? `M${point.x},${point.y}` : `L${point.x},${point.y}`))
   .join(' ');
 
-function formatWon(value: number) {
-  return `${value.toLocaleString('ko-KR')}원`;
+function formatNumber(value: number) {
+  return value.toLocaleString('ko-KR');
 }
 
 function formatShortWon(value: number) {
   if (value >= 100000000) {
     const hundredMillion = Math.floor(value / 100000000);
     const restMan = Math.round((value % 100000000) / 10000);
-    return `${hundredMillion}억 ${restMan.toLocaleString('ko-KR')}만원`;
+    return `${hundredMillion}억 ${formatNumber(restMan)}만원`;
   }
 
-  return `${Math.round(value / 10000).toLocaleString('ko-KR')}만원`;
+  return `${formatNumber(Math.round(value / 10000))}만원`;
 }
 
 function formatOrders(value: number) {
-  return `${value.toLocaleString('ko-KR')}콜`;
+  return `${formatNumber(value)}콜`;
 }
 
-function StatCard({ eyebrow, value, label }: { eyebrow: string; value: string; label: string }) {
+function RollingNumber({
+  value,
+  suffix,
+  className,
+}: {
+  value: number;
+  suffix: string;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.65 });
+  const shouldReduceMotion = useReducedMotion();
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!inView || shouldReduceMotion) return;
+
+    const controls = animate(0, value, {
+      duration: 1.65,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => setDisplayValue(Math.round(latest)),
+    });
+
+    return () => controls.stop();
+  }, [inView, shouldReduceMotion, value]);
+
   return (
-    <div className="rounded-lg border border-[color:var(--color-wood-700)] bg-black/42 p-5 shadow-[0_22px_54px_-34px_rgba(0,0,0,0.9)]">
-      <p className="font-(family-name:--font-noto-sans-kr) text-[11px] font-black tracking-[0.2em] text-[var(--color-red-400)]">
-        {eyebrow}
-      </p>
-      <p className="mt-3 font-(family-name:--font-black-han-sans) text-3xl leading-none text-[var(--color-beige-100)] sm:text-4xl">
-        {value}
-      </p>
-      <p className="mt-2 font-(family-name:--font-noto-sans-kr) text-sm font-bold text-[var(--color-beige-500)]">
-        {label}
-      </p>
-    </div>
+    <span ref={ref} className={className}>
+      <span className="tabular-nums">
+        {formatNumber(shouldReduceMotion ? value : displayValue)}
+      </span>
+      <span className="ml-1">{suffix}</span>
+    </span>
   );
 }
 
-function ComboChart() {
+function HeroMetric({
+  eyebrow,
+  value,
+  suffix,
+  label,
+  featured = false,
+}: {
+  eyebrow: string;
+  value: number;
+  suffix: string;
+  label: string;
+  featured?: boolean;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.85, ease: EASE }}
+      className={[
+        'relative overflow-hidden rounded-lg border border-[color:var(--color-wood-700)] bg-black/46 shadow-[0_30px_80px_-48px_rgba(0,0,0,0.95)] backdrop-blur-md',
+        featured ? 'p-6 sm:p-8 lg:p-10' : 'p-5 sm:p-7',
+      ].join(' ')}
+    >
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[var(--color-beige-100)]/50 to-transparent"
+      />
+      <p className="font-(family-name:--font-noto-sans-kr) text-[11px] font-black tracking-[0.24em] text-[var(--color-red-400)]">
+        {eyebrow}
+      </p>
+      <RollingNumber
+        value={value}
+        suffix={suffix}
+        className={[
+          'mt-4 block font-(family-name:--font-black-han-sans) leading-none tracking-normal text-[var(--color-beige-100)]',
+          featured ? 'text-[clamp(2rem,6.8vw,5.6rem)]' : 'text-[clamp(2.2rem,5.8vw,4.8rem)]',
+        ].join(' ')}
+      />
+      <p className="mt-4 font-(family-name:--font-noto-sans-kr) text-sm font-bold text-[var(--color-beige-500)] sm:text-base">
+        {label}
+      </p>
+    </motion.div>
+  );
+}
+
+function MonthlySalesChart() {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -74,38 +139,35 @@ function ComboChart() {
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="font-(family-name:--font-noto-sans-kr) text-[11px] font-black tracking-[0.24em] text-[var(--color-red-400)]">
-            MAPO MAIN STORE
+            MONTHLY SALES
           </p>
           <h3 className="mt-2 font-(family-name:--font-black-han-sans) text-3xl leading-none text-white sm:text-4xl">
-            월별 매출 + 객단가
+            월별 매출 추이
           </h3>
         </div>
         <div className="flex gap-3 font-(family-name:--font-noto-sans-kr) text-xs font-bold text-[var(--color-beige-500)]">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-red-400)]" />
-            월매출
+            <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-beige-100)]" />
+            배민
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-beige-100)]" />
-            객단가
+            <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-red-500)]" />
+            쿠팡
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-0.5 w-5 bg-[var(--color-wood-300)]" />
+            총매출
           </span>
         </div>
       </div>
 
-      <div className="relative aspect-[760/360] w-full">
+      <div className="relative aspect-[820/390] w-full">
         <svg viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} className="h-full w-full">
           <defs>
-            <linearGradient id="mapo-sales-bar" x1="0" x2="0" y1="0" y2="1">
+            <linearGradient id="mapo-coupang-bar" x1="0" x2="0" y1="0" y2="1">
               <stop offset="0%" stopColor="#E04F61" />
               <stop offset="100%" stopColor="#8E1B2C" />
             </linearGradient>
-            <filter id="mapo-chart-glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
           </defs>
 
           {[0.25, 0.5, 0.75, 1].map((line) => {
@@ -113,8 +175,8 @@ function ComboChart() {
             return (
               <line
                 key={line}
-                x1={CHART_PADDING_X - 30}
-                x2={CHART_WIDTH - CHART_PADDING_X + 30}
+                x1={CHART_PADDING_X - 24}
+                x2={CHART_WIDTH - CHART_PADDING_X + 24}
                 y1={y}
                 y2={y}
                 stroke="rgba(245,233,201,0.11)"
@@ -124,10 +186,14 @@ function ComboChart() {
           })}
 
           {mapoMonthlySalesSummary.map((item, index) => {
-            const barWidth = 86;
-            const x = chartPoints[index].x - barWidth / 2;
-            const height = (item.totalSales / maxSales) * CHART_INNER_HEIGHT;
-            const y = CHART_PADDING_TOP + CHART_INNER_HEIGHT - height;
+            const slotWidth = CHART_INNER_WIDTH / mapoMonthlySalesSummary.length;
+            const barWidth = 82;
+            const x = CHART_PADDING_X + slotWidth * index + (slotWidth - barWidth) / 2;
+            const totalHeight = (item.totalSales / maxSales) * CHART_INNER_HEIGHT;
+            const baeminHeight = (item.baeminSales / item.totalSales) * totalHeight;
+            const coupangHeight = totalHeight - baeminHeight;
+            const baseY = CHART_PADDING_TOP + CHART_INNER_HEIGHT;
+            const topY = baseY - totalHeight;
 
             return (
               <motion.g
@@ -135,19 +201,27 @@ function ComboChart() {
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.65, delay: 0.12 + index * 0.12, ease: EASE }}
+                transition={{ duration: 0.65, delay: 0.12 + index * 0.11, ease: EASE }}
               >
                 <rect
                   x={x}
-                  y={y}
+                  y={topY}
                   width={barWidth}
-                  height={height}
+                  height={coupangHeight}
                   rx={10}
-                  fill="url(#mapo-sales-bar)"
+                  fill="url(#mapo-coupang-bar)"
+                />
+                <rect
+                  x={x}
+                  y={baseY - baeminHeight}
+                  width={barWidth}
+                  height={baeminHeight}
+                  rx={10}
+                  fill="var(--color-beige-100)"
                 />
                 <text
                   x={x + barWidth / 2}
-                  y={y - 16}
+                  y={topY - 16}
                   textAnchor="middle"
                   className="fill-[var(--color-beige-100)] font-(family-name:--font-noto-sans-kr) text-[18px] font-black"
                 >
@@ -155,7 +229,15 @@ function ComboChart() {
                 </text>
                 <text
                   x={x + barWidth / 2}
-                  y={CHART_HEIGHT - 22}
+                  y={CHART_HEIGHT - 40}
+                  textAnchor="middle"
+                  className="fill-[var(--color-beige-100)] font-(family-name:--font-noto-sans-kr) text-[16px] font-black"
+                >
+                  {formatOrders(item.totalOrders)}
+                </text>
+                <text
+                  x={x + barWidth / 2}
+                  y={CHART_HEIGHT - 18}
                   textAnchor="middle"
                   className="fill-[var(--color-beige-500)] font-(family-name:--font-noto-sans-kr) text-[17px] font-black"
                 >
@@ -166,45 +248,36 @@ function ComboChart() {
           })}
 
           <motion.path
-            d={aovPath}
+            d={monthlySalesPath}
             fill="none"
-            stroke="var(--color-beige-100)"
+            stroke="var(--color-wood-300)"
             strokeWidth={4}
             strokeLinecap="round"
             strokeLinejoin="round"
-            filter="url(#mapo-chart-glow)"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 1.25, delay: 0.45, ease: EASE }}
+            transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
           />
 
-          {chartPoints.map((point, index) => (
+          {monthlySalesLinePoints.map((point, index) => (
             <motion.g
-              key={`${point.month}-aov`}
+              key={`${mapoMonthlySalesSummary[index].month}-total-line`}
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.45, delay: 0.9 + index * 0.12, ease: EASE }}
+              transition={{ duration: 0.4, delay: 0.92 + index * 0.1, ease: EASE }}
               style={{ transformOrigin: `${point.x}px ${point.y}px` }}
             >
-              <circle cx={point.x} cy={point.y} r={13} fill="rgba(245,233,201,0.18)" />
+              <circle cx={point.x} cy={point.y} r={13} fill="rgba(201,157,112,0.22)" />
               <circle
                 cx={point.x}
                 cy={point.y}
                 r={7}
-                fill="var(--color-beige-100)"
-                stroke="var(--color-red-500)"
+                fill="var(--color-wood-300)"
+                stroke="var(--color-surface-900)"
                 strokeWidth={3}
               />
-              <text
-                x={point.x}
-                y={point.y - 20}
-                textAnchor="middle"
-                className="fill-white font-(family-name:--font-noto-sans-kr) text-[16px] font-black"
-              >
-                {formatWon(point.averageOrderValue)}
-              </text>
             </motion.g>
           ))}
         </svg>
@@ -255,7 +328,7 @@ function PlatformShare() {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+      <div className="mt-6 grid gap-3">
         <div className="rounded-lg bg-black/28 p-4">
           <p className="font-(family-name:--font-noto-sans-kr) text-xs font-black text-[var(--color-beige-500)]">
             배민 누적 매출
@@ -281,7 +354,7 @@ function PlatformShare() {
       </div>
 
       <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-xs leading-[1.75] font-medium text-white/45">
-        * 마포본점 2026년 1월부터 3월까지의 배달앱 매출 데이터 기준입니다. 매출은 상권, 운영 방식,
+        * 마포본점 2026년 1월부터 4월까지의 배달앱 매출 데이터 기준입니다. 매출은 상권, 운영 방식,
         배달앱 환경에 따라 달라질 수 있습니다.
       </p>
     </motion.aside>
@@ -314,7 +387,7 @@ export function MapoSalesDashboardSection() {
         aria-hidden
         className="absolute top-8 right-[6%] -z-10 font-(family-name:--font-black-han-sans) text-[190px] leading-none text-[rgba(73,8,15,0.24)] sm:top-12 sm:text-[300px]"
       >
-        3M
+        4M
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8">
@@ -323,44 +396,42 @@ export function MapoSalesDashboardSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.85, ease: EASE }}
-          className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end"
+          className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-end"
         >
           <div>
             <p className="mb-5 font-(family-name:--font-noto-sans-kr) text-[11px] font-black tracking-[0.34em] text-[var(--color-red-400)] sm:text-xs">
               REAL SALES DATA
             </p>
             <h2 className="font-(family-name:--font-black-han-sans) text-4xl leading-[1.06] text-white sm:text-6xl md:text-7xl">
-              마포본점 3개월 연속
+              마포본점 4개월 연속
               <br />
               <span className="text-[var(--color-beige-100)]">월매출 1억 이상</span>
             </h2>
           </div>
           <p className="max-w-2xl font-(family-name:--font-noto-sans-kr) text-base leading-[1.8] font-bold text-[var(--color-beige-500)] sm:text-lg lg:justify-self-end">
-            주문 수만 많은 것이 아니라, 평균 객단가까지 꾸준히 상승한 실제 매출 흐름입니다. 창업
-            판단에 필요한 숫자를 한 화면에서 확인할 수 있게 정리했습니다.
+            2026년 1월부터 4월까지, 마포본점은 배달앱 기준 월매출 1억 이상 흐름을 이어가고 있습니다.
+            창업 판단에 필요한 실제 매출과 콜수를 중심으로 정리했습니다.
           </p>
         </motion.header>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-3 lg:mt-16">
-          <StatCard
-            eyebrow="TOTAL SALES"
-            value={formatWon(mapoSalesTotal.totalSales)}
-            label="3개월 누적 매출"
+        <div className="mt-12 grid gap-4 lg:mt-16 lg:grid-cols-[1.3fr_0.7fr]">
+          <HeroMetric
+            eyebrow="4 MONTH TOTAL SALES"
+            value={mapoSalesTotal.totalSales}
+            suffix="원"
+            label="2026년 1월-4월 누적 매출"
+            featured
           />
-          <StatCard
-            eyebrow="TOTAL ORDERS"
-            value={formatOrders(mapoSalesTotal.totalOrders)}
-            label="3개월 누적 주문"
-          />
-          <StatCard
-            eyebrow="AVG ORDER"
-            value={formatWon(mapoSalesMetrics.averageOrderValue)}
-            label="3개월 평균 객단가"
+          <HeroMetric
+            eyebrow="4 MONTH TOTAL CALLS"
+            value={mapoSalesTotal.totalOrders}
+            suffix="콜"
+            label="2026년 1월-4월 누적 주문"
           />
         </div>
 
         <div className="mt-10 grid gap-6 lg:mt-12 lg:grid-cols-[1.25fr_0.75fr]">
-          <ComboChart />
+          <MonthlySalesChart />
           <PlatformShare />
         </div>
       </div>

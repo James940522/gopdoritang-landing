@@ -1,5 +1,5 @@
 export type MapoMonthlySales = {
-  month: '1월' | '2월' | '3월';
+  month: '1월' | '2월' | '3월' | '4월';
   baeminSales: number;
   baeminOrders: number;
   coupangSales: number;
@@ -9,7 +9,6 @@ export type MapoMonthlySales = {
 export type MapoMonthlySalesSummary = MapoMonthlySales & {
   totalSales: number;
   totalOrders: number;
-  averageOrderValue: number;
   baeminShare: number;
   coupangShare: number;
 };
@@ -36,6 +35,13 @@ export const mapoMonthlySales = [
     coupangSales: 83063600,
     coupangOrders: 4420,
   },
+  {
+    month: '4월',
+    baeminSales: 27279500,
+    baeminOrders: 1579,
+    coupangSales: 96979900,
+    coupangOrders: 4989,
+  },
 ] as const satisfies readonly MapoMonthlySales[];
 
 export const mapoMonthlySalesSummary = mapoMonthlySales.map((item) => {
@@ -46,7 +52,6 @@ export const mapoMonthlySalesSummary = mapoMonthlySales.map((item) => {
     ...item,
     totalSales,
     totalOrders,
-    averageOrderValue: Math.round(totalSales / totalOrders),
     baeminShare: Number(((item.baeminSales / totalSales) * 100).toFixed(1)),
     coupangShare: Number(((item.coupangSales / totalSales) * 100).toFixed(1)),
   };
@@ -72,11 +77,8 @@ export const mapoSalesTotal = mapoMonthlySalesSummary.reduce(
 );
 
 export const mapoSalesMetrics = {
-  averageOrderValue: Math.round(mapoSalesTotal.totalSales / mapoSalesTotal.totalOrders),
   baeminShare: Number(((mapoSalesTotal.baeminSales / mapoSalesTotal.totalSales) * 100).toFixed(1)),
   coupangShare: Number(
     ((mapoSalesTotal.coupangSales / mapoSalesTotal.totalSales) * 100).toFixed(1),
   ),
-  baeminAverageOrderValue: Math.round(mapoSalesTotal.baeminSales / mapoSalesTotal.baeminOrders),
-  coupangAverageOrderValue: Math.round(mapoSalesTotal.coupangSales / mapoSalesTotal.coupangOrders),
 } as const;
