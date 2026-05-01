@@ -8,4 +8,12 @@ export { profitStructureCards, type ProfitStructureCard } from './profit-structu
 export { menus, type MenuItem } from './menus';
 export { reviews, type Review } from './reviews';
 export { costRows, type CostRow } from './cost-rows';
+export {
+  mapoMonthlySales,
+  mapoMonthlySalesSummary,
+  mapoSalesMetrics,
+  mapoSalesTotal,
+  type MapoMonthlySales,
+  type MapoMonthlySalesSummary,
+} from './mapo-sales';
 export { processSteps, type ProcessStep } from './process-steps';
