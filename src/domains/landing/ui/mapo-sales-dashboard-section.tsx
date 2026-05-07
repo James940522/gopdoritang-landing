@@ -26,6 +26,7 @@ const monthlySalesLinePoints = mapoMonthlySalesSummary.map((item, index) => {
 const monthlySalesPath = monthlySalesLinePoints
   .map((point, index) => (index === 0 ? `M${point.x},${point.y}` : `L${point.x},${point.y}`))
   .join(' ');
+const averageMonthlySales = Math.round(mapoSalesTotal.totalSales / mapoMonthlySalesSummary.length);
 
 function formatNumber(value: number) {
   return value.toLocaleString('ko-KR');
@@ -39,10 +40,6 @@ function formatShortWon(value: number) {
   }
 
   return `${formatNumber(Math.round(value / 10000))}만원`;
-}
-
-function formatOrders(value: number) {
-  return `${formatNumber(value)}콜`;
 }
 
 function RollingNumber({
@@ -231,14 +228,6 @@ function MonthlySalesChart() {
                   x={x + barWidth / 2}
                   y={CHART_HEIGHT - 40}
                   textAnchor="middle"
-                  className="fill-[var(--color-beige-100)] font-(family-name:--font-noto-sans-kr) text-[16px] font-black"
-                >
-                  {formatOrders(item.totalOrders)}
-                </text>
-                <text
-                  x={x + barWidth / 2}
-                  y={CHART_HEIGHT - 18}
-                  textAnchor="middle"
                   className="fill-[var(--color-beige-500)] font-(family-name:--font-noto-sans-kr) text-[17px] font-black"
                 >
                   {item.month}
@@ -337,7 +326,7 @@ function PlatformShare() {
             {formatShortWon(mapoSalesTotal.baeminSales)}
           </p>
           <p className="mt-1 font-(family-name:--font-noto-sans-kr) text-xs font-bold text-white/50">
-            {mapoSalesMetrics.baeminShare}% · {formatOrders(mapoSalesTotal.baeminOrders)}
+            전체 매출 중 {mapoSalesMetrics.baeminShare}%
           </p>
         </div>
         <div className="rounded-lg bg-black/28 p-4">
@@ -348,7 +337,7 @@ function PlatformShare() {
             {formatShortWon(mapoSalesTotal.coupangSales)}
           </p>
           <p className="mt-1 font-(family-name:--font-noto-sans-kr) text-xs font-bold text-white/50">
-            {mapoSalesMetrics.coupangShare}% · {formatOrders(mapoSalesTotal.coupangOrders)}
+            전체 매출 중 {mapoSalesMetrics.coupangShare}%
           </p>
         </div>
       </div>
@@ -410,7 +399,7 @@ export function MapoSalesDashboardSection() {
           </div>
           <p className="max-w-2xl font-(family-name:--font-noto-sans-kr) text-base leading-[1.8] font-bold text-[var(--color-beige-500)] sm:text-lg lg:justify-self-end">
             2026년 1월부터 4월까지, 마포본점은 배달앱 기준 월매출 1억 이상 흐름을 이어가고 있습니다.
-            창업 판단에 필요한 실제 매출과 콜수를 중심으로 정리했습니다.
+            창업 판단에 필요한 실제 매출 흐름을 한눈에 볼 수 있도록 정리했습니다.
           </p>
         </motion.header>
 
@@ -423,10 +412,10 @@ export function MapoSalesDashboardSection() {
             featured
           />
           <HeroMetric
-            eyebrow="4 MONTH TOTAL CALLS"
-            value={mapoSalesTotal.totalOrders}
-            suffix="콜"
-            label="2026년 1월-4월 누적 주문"
+            eyebrow="MONTHLY AVERAGE SALES"
+            value={averageMonthlySales}
+            suffix="원"
+            label="2026년 1월-4월 평균 월매출"
           />
         </div>
 

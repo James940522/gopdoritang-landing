@@ -1,19 +1,63 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { franchiseBenefitRows, type FranchiseBenefitRow } from '../model';
 import { AmbientTypeTicker } from './ambient-type-ticker';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-function AmountCell({ amount }: { amount: FranchiseBenefitRow['amount'] }) {
+function AmountCell({ amount, index }: { amount: FranchiseBenefitRow['amount']; index: number }) {
+  const shouldReduceMotion = useReducedMotion();
+
   if (amount === 'waived') {
     return (
-      <div className="flex justify-center">
-        <span className="-rotate-3 rounded-md border-2 border-[color:var(--color-red-500)] bg-[var(--color-red-500)]/10 px-4 py-2 font-(family-name:--font-black-han-sans) text-2xl leading-none text-[var(--color-red-500)] shadow-[0_12px_26px_-18px_rgba(215,38,61,0.85)]">
-          면제
-        </span>
-      </div>
+      <motion.div
+        className="flex justify-center"
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
+        whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1 }}
+        viewport={{ once: true, amount: 0.75 }}
+      >
+        <motion.span
+          aria-label="면제"
+          initial={
+            shouldReduceMotion
+              ? false
+              : {
+                  opacity: 0,
+                  scale: 1.9,
+                  rotate: -18,
+                  filter: 'blur(2px)',
+                }
+          }
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            rotate: -7,
+            filter: 'blur(0px)',
+          }}
+          viewport={{ once: true, amount: 0.75 }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : {
+                  type: 'spring',
+                  stiffness: 520,
+                  damping: 18,
+                  mass: 0.7,
+                  delay: 0.12 + index * 0.055,
+                }
+          }
+          className="relative grid h-[58px] w-[96px] place-items-center rounded-md border-2 border-[color:var(--color-red-500)] bg-[rgba(215,38,61,0.08)] font-(family-name:--font-black-han-sans) leading-none text-[var(--color-red-500)] shadow-[0_18px_34px_-22px_rgba(215,38,61,0.95)]"
+        >
+          <span
+            aria-hidden
+            className="absolute inset-1 rounded-[5px] border border-[color:var(--color-red-500)]/80"
+          />
+          <span aria-hidden className="text-[34px]">
+            無
+          </span>
+        </motion.span>
+      </motion.div>
     );
   }
 
@@ -145,7 +189,7 @@ export function FranchiseBenefitSection() {
                       ) : null}
                     </td>
                     <td className="bg-[var(--color-surface-800)] px-6 py-6 text-center align-middle">
-                      <AmountCell amount={row.amount} />
+                      <AmountCell amount={row.amount} index={index} />
                     </td>
                   </motion.tr>
                 ))}

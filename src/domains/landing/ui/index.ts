@@ -4,5 +4,6 @@ export { FranchiseGrowthSection } from './franchise-growth-section';
 export { HeroSection } from './hero-section';
 export { LandingPage } from './landing-page';
 export { MapoSalesDashboardSection } from './mapo-sales-dashboard-section';
+export { MenuSection } from './menu-section';
 export { ProfitStructureSection } from './profit-structure-section';
 export { SalesSection } from './sales-section';

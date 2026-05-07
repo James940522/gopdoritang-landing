@@ -17,8 +17,7 @@ function TickerLine({ line, index }: { line: AmbientTypeTickerLine; index: numbe
   const shouldReduceMotion = useReducedMotion();
   const isOutline = line.variant === 'outline';
   const duration = 34 + index * 5;
-  const animateX =
-    line.direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'];
+  const animateX = line.direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'];
 
   const content = (
     <div className="flex shrink-0 items-center">
@@ -34,13 +33,11 @@ function TickerLine({ line, index }: { line: AmbientTypeTickerLine; index: numbe
     <div
       className={[
         'overflow-hidden font-(family-name:--font-black-han-sans) text-[22px] leading-none tracking-normal whitespace-nowrap uppercase sm:text-[30px] lg:text-[38px]',
-        isOutline ? 'text-transparent' : 'text-[rgba(215,38,61,0.20)]',
-      ].join(' ')}
-      style={
         isOutline
-          ? { WebkitTextStroke: '1px rgba(215,38,61,0.36)' }
-          : undefined
-      }
+          ? 'text-transparent drop-shadow-[0_0_16px_rgba(255,48,71,0.14)]'
+          : 'text-[rgba(255,48,71,0.54)] drop-shadow-[0_0_18px_rgba(255,48,71,0.22)]',
+      ].join(' ')}
+      style={isOutline ? { WebkitTextStroke: '1px rgba(255,48,71,0.78)' } : undefined}
     >
       {shouldReduceMotion ? (
         <div className="flex w-max">{content}</div>
@@ -62,10 +59,7 @@ export function AmbientTypeTicker({ lines, className }: AmbientTypeTickerProps) 
   return (
     <div
       aria-hidden
-      className={[
-        'pointer-events-none select-none overflow-hidden py-2',
-        className,
-      ]
+      className={['pointer-events-none select-none overflow-hidden py-2', className]
         .filter(Boolean)
         .join(' ')}
     >
