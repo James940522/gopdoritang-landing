@@ -27,9 +27,7 @@ const points = monthlySales.map((d, i) => {
   return { ...d, x, y };
 });
 
-const pathD = points
-  .map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`))
-  .join(' ');
+const pathD = points.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ');
 
 function CountUp({ to, duration = 1.8 }: { to: number; duration?: number }) {
   const [value, setValue] = useState(0);
@@ -46,9 +44,7 @@ function CountUp({ to, duration = 1.8 }: { to: number; duration?: number }) {
     return () => controls.stop();
   }, [inView, to, duration]);
 
-  return (
-    <span ref={ref}>{Math.floor(value).toLocaleString('ko-KR')}</span>
-  );
+  return <span ref={ref}>{Math.floor(value).toLocaleString('ko-KR')}</span>;
 }
 
 function SectionHeader() {
@@ -108,9 +104,7 @@ function SalesHighlightCard() {
       </p>
       <p className="font-(family-name:--font-black-han-sans) text-4xl leading-none tracking-tight text-[#FFD9A0] sm:text-6xl md:text-7xl">
         <CountUp to={peakMonthlySale.sales} />
-        <span className="ml-1 align-baseline text-2xl sm:text-4xl md:text-5xl">
-          원
-        </span>
+        <span className="ml-1 align-baseline text-2xl sm:text-4xl md:text-5xl">원</span>
       </p>
       <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-[11px] text-white/50 sm:text-[12px]">
         * 심 곱도리탕 서울 OO점의 실제 매출입니다.
@@ -181,14 +175,7 @@ function MonthlyChart() {
               style={{ transformOrigin: `${p.x}px ${p.y}px` }}
             >
               <circle cx={p.x} cy={p.y} r={12} fill="#E11D1D" opacity={0.25} />
-              <circle
-                cx={p.x}
-                cy={p.y}
-                r={7}
-                fill="#FFD9A0"
-                stroke="#E11D1D"
-                strokeWidth={3}
-              />
+              <circle cx={p.x} cy={p.y} r={7} fill="#FFD9A0" stroke="#E11D1D" strokeWidth={3} />
             </motion.g>
           ))}
         </svg>
@@ -237,7 +224,7 @@ export function SalesSection() {
     >
       {/* 트로피 배경 — 섹션 전체 fill */}
       <Image
-        src="/asset/sec-3/bg.png"
+        src="/asset/sec-3/bg.webp"
         alt=""
         fill
         sizes="100vw"
@@ -246,10 +233,7 @@ export function SalesSection() {
       />
 
       {/* 어두운 오버레이 — 트로피는 살짝 보존, 콘텐츠 영역 가독성 확보 */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-20 bg-[#0E0907]/55"
-      />
+      <div aria-hidden className="absolute inset-0 -z-20 bg-[#0E0907]/55" />
 
       {/* 위/아래 페이드 — 위·아래 섹션과 자연 연결 */}
       <div

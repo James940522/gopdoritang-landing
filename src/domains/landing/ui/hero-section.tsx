@@ -101,7 +101,7 @@ export function HeroSection() {
             transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: 1.6 }}
           >
             <Image
-              src="/asset/sec-1/main-bowl.png"
+              src="/asset/sec-1/main-bowl.webp"
               alt="심곱도리탕 메인 메뉴"
               width={600}
               height={540}

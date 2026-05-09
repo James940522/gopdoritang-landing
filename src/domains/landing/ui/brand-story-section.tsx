@@ -14,7 +14,7 @@ export function BrandStorySection() {
     >
       {/* 배경 이미지 */}
       <Image
-        src="/asset/sec-2/bg.png"
+        src="/asset/sec-2/bg.webp"
         alt=""
         fill
         sizes="100vw"

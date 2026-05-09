@@ -8,7 +8,7 @@ export function ContactSection() {
     <section id="contact" className="relative isolate overflow-hidden bg-black text-white">
       <div className="relative min-h-dvh py-24 sm:py-28 lg:py-32">
         <Image
-          src="/asset/sec-9/bg.jpeg"
+          src="/asset/sec-9/bg.webp"
           alt=""
           fill
           sizes="100vw"

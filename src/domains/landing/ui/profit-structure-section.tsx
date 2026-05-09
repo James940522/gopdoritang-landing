@@ -76,10 +76,16 @@ function CardVisual({ card, index }: { card: ProfitStructureCard; index: number 
 
   return (
     <div className="absolute inset-0 overflow-hidden rounded-t-[28px] bg-black sm:rounded-t-[42px]">
-      <Image src={card.image} alt="" fill sizes="100vw" className="object-cover opacity-72" />
+      <Image
+        src={card.image}
+        alt=""
+        fill
+        sizes="100vw"
+        className="h-full w-full scale-[1.03] object-cover object-center opacity-100"
+      />
       <div
         aria-hidden
-        className="absolute inset-0 bg-linear-to-t from-black via-black/42 to-black/22"
+        className="absolute inset-0 bg-linear-to-t from-black/92 via-black/34 to-black/10"
       />
       <div
         aria-hidden
