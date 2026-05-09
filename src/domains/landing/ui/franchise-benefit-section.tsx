@@ -47,13 +47,13 @@ function AmountCell({ amount, index }: { amount: FranchiseBenefitRow['amount']; 
                   delay: 0.12 + index * 0.055,
                 }
           }
-          className="relative grid h-[58px] w-[96px] place-items-center rounded-md border-2 border-[color:var(--color-red-500)] bg-[rgba(215,38,61,0.08)] font-(family-name:--font-black-han-sans) leading-none text-[var(--color-red-500)] shadow-[0_18px_34px_-22px_rgba(215,38,61,0.95)]"
+          className="relative grid h-11 w-[72px] place-items-center rounded-[5px] border-2 border-[color:var(--color-red-500)] bg-[rgba(215,38,61,0.08)] font-(family-name:--font-black-han-sans) leading-none text-[var(--color-red-500)] shadow-[0_18px_34px_-22px_rgba(215,38,61,0.95)] sm:h-[58px] sm:w-[96px] sm:rounded-md"
         >
           <span
             aria-hidden
-            className="absolute inset-1 rounded-[5px] border border-[color:var(--color-red-500)]/80"
+            className="absolute inset-1 rounded-[4px] border border-[color:var(--color-red-500)]/80 sm:rounded-[5px]"
           />
-          <span aria-hidden className="text-[34px]">
+          <span aria-hidden className="text-[26px] sm:text-[34px]">
             無
           </span>
         </motion.span>
@@ -68,7 +68,7 @@ function AmountCell({ amount, index }: { amount: FranchiseBenefitRow['amount']; 
   }[amount];
 
   return (
-    <span className="font-(family-name:--font-black-han-sans) text-2xl leading-none text-[var(--color-beige-100)]">
+    <span className="block font-(family-name:--font-black-han-sans) text-sm leading-[1.15] break-keep text-[var(--color-beige-100)] sm:text-2xl sm:leading-none">
       {label}
     </span>
   );
@@ -152,17 +152,17 @@ export function FranchiseBenefitSection() {
           transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
           className="mt-12 overflow-hidden rounded-lg border border-[color:var(--color-wood-700)] bg-[rgba(15,12,10,0.9)] shadow-[0_36px_110px_-54px_rgba(0,0,0,0.95)] lg:mt-16"
         >
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[860px] border-collapse">
+          <div className="w-full overflow-hidden">
+            <table className="w-full table-fixed border-collapse lg:min-w-[860px]">
               <thead>
                 <tr className="bg-black text-[var(--color-beige-100)]">
-                  <th className="w-[23%] px-6 py-5 text-center font-(family-name:--font-black-han-sans) text-3xl font-normal">
+                  <th className="w-[25%] px-2 py-4 text-center font-(family-name:--font-black-han-sans) text-[clamp(22px,6vw,30px)] leading-none font-normal sm:w-[23%] sm:px-6 sm:py-5 sm:text-3xl">
                     구분
                   </th>
-                  <th className="w-[49%] border-x border-white/45 px-6 py-5 text-center font-(family-name:--font-black-han-sans) text-3xl font-normal">
+                  <th className="w-[47%] border-x border-white/45 px-2 py-4 text-center font-(family-name:--font-black-han-sans) text-[clamp(22px,6vw,30px)] leading-none font-normal sm:w-[49%] sm:px-6 sm:py-5 sm:text-3xl">
                     내용
                   </th>
-                  <th className="w-[28%] px-6 py-5 text-center font-(family-name:--font-black-han-sans) text-3xl font-normal">
+                  <th className="w-[28%] px-2 py-4 text-center font-(family-name:--font-black-han-sans) text-[clamp(22px,6vw,30px)] leading-none font-normal sm:px-6 sm:py-5 sm:text-3xl">
                     금액
                   </th>
                 </tr>
@@ -177,18 +177,18 @@ export function FranchiseBenefitSection() {
                     transition={{ duration: 0.55, delay: index * 0.045, ease: EASE }}
                     className="border-b border-[color:var(--color-wood-800)] last:border-b-0"
                   >
-                    <td className="bg-[var(--color-surface-800)] px-6 py-6 text-center align-middle font-(family-name:--font-black-han-sans) text-3xl leading-none text-white">
+                    <td className="bg-[var(--color-surface-800)] px-2 py-5 text-center align-middle font-(family-name:--font-black-han-sans) text-[clamp(23px,6.4vw,30px)] leading-[1.08] break-keep text-white sm:px-6 sm:py-6 sm:text-3xl sm:leading-none">
                       {row.category}
                     </td>
-                    <td className="bg-[rgba(245,233,201,0.92)] px-6 py-6 text-center align-middle font-(family-name:--font-noto-sans-kr) text-xl leading-[1.35] font-black text-[var(--color-surface-900)]">
+                    <td className="bg-[rgba(245,233,201,0.92)] px-3 py-5 text-center align-middle font-(family-name:--font-noto-sans-kr) text-[clamp(13px,3.5vw,20px)] leading-[1.38] font-black break-keep text-[var(--color-surface-900)] sm:px-6 sm:py-6 sm:text-xl sm:leading-[1.35]">
                       {row.content}
                       {row.note ? (
-                        <p className="mt-2 text-sm font-bold text-[var(--color-surface-300)]">
+                        <p className="mt-1 text-[11px] leading-[1.35] font-bold text-[var(--color-surface-300)] sm:mt-2 sm:text-sm">
                           {row.note}
                         </p>
                       ) : null}
                     </td>
-                    <td className="bg-[var(--color-surface-800)] px-6 py-6 text-center align-middle">
+                    <td className="bg-[var(--color-surface-800)] px-2 py-5 text-center align-middle sm:px-6 sm:py-6">
                       <AmountCell amount={row.amount} index={index} />
                     </td>
                   </motion.tr>
@@ -196,11 +196,11 @@ export function FranchiseBenefitSection() {
                 <tr>
                   <td
                     colSpan={2}
-                    className="bg-black px-6 py-7 text-center font-(family-name:--font-black-han-sans) text-3xl leading-none text-[var(--color-beige-300)]"
+                    className="bg-black px-3 py-6 text-center font-(family-name:--font-black-han-sans) text-[clamp(24px,6.6vw,30px)] leading-none text-[var(--color-beige-300)] sm:px-6 sm:py-7 sm:text-3xl"
                   >
                     최종 창업비용
                   </td>
-                  <td className="bg-[var(--color-beige-100)] px-6 py-7 text-center font-(family-name:--font-black-han-sans) text-3xl leading-none text-[var(--color-surface-900)]">
+                  <td className="bg-[var(--color-beige-100)] px-2 py-6 text-center font-(family-name:--font-black-han-sans) text-[clamp(17px,4.8vw,30px)] leading-[1.1] break-keep text-[var(--color-surface-900)] sm:px-6 sm:py-7 sm:text-3xl sm:leading-none">
                     상담시 안내
                   </td>
                 </tr>

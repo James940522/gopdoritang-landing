@@ -10,7 +10,7 @@ export const profitStructureCards: ProfitStructureCard[] = [
     problem: '느린 조리 = 낮은 회전율',
     solution: '빠른 조리로 매출을 올리는 구조',
     caption: '01 / COOKING FLOW',
-    image: '/asset/sec-5/1-wide.webp',
+    image: '/asset/sec-5/fast-cooking.webp',
   },
   {
     problem: '높은 인건비 = 수익 감소',

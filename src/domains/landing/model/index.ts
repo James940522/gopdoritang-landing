@@ -6,6 +6,7 @@ export { problems, type Problem } from './problems';
 export { strengths, type Strength } from './strengths';
 export { profitBars, type ProfitItem } from './profit';
 export { profitStructureCards, type ProfitStructureCard } from './profit-structure';
+export { territoryProtection } from './territory-protection';
 export { menus, type MenuItem } from './menus';
 export { reviews, type Review } from './reviews';
 export { costRows, type CostRow } from './cost-rows';

@@ -8,3 +8,4 @@ export { MapoSalesDashboardSection } from './mapo-sales-dashboard-section';
 export { MenuSection } from './menu-section';
 export { ProfitStructureSection } from './profit-structure-section';
 export { SalesSection } from './sales-section';
+export { TerritoryProtectionSection } from './territory-protection-section';

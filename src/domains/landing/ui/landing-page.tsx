@@ -8,6 +8,7 @@ import { MenuSection } from './menu-section';
 import { ProfitStructureSection } from './profit-structure-section';
 import { SalesSection } from './sales-section';
 import { SiteHeader } from './site-header';
+import { TerritoryProtectionSection } from './territory-protection-section';
 
 export function LandingPage() {
   return (
@@ -21,6 +22,7 @@ export function LandingPage() {
         <ProfitStructureSection />
         <MapoSalesDashboardSection />
         <FranchiseBenefitSection />
+        <TerritoryProtectionSection />
         <MenuSection />
         <ContactSection />
       </main>
