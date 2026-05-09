@@ -1,4 +1,5 @@
 import { BrandStorySection } from './brand-story-section';
+import { ContactSection } from './contact-section';
 import { FranchiseBenefitSection } from './franchise-benefit-section';
 import { FranchiseGrowthSection } from './franchise-growth-section';
 import { HeroSection } from './hero-section';
@@ -21,6 +22,7 @@ export function LandingPage() {
         <MapoSalesDashboardSection />
         <FranchiseBenefitSection />
         <MenuSection />
+        <ContactSection />
       </main>
     </>
   );

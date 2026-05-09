@@ -1,4 +1,5 @@
 export { BrandStorySection } from './brand-story-section';
+export { ContactSection } from './contact-section';
 export { FranchiseBenefitSection } from './franchise-benefit-section';
 export { FranchiseGrowthSection } from './franchise-growth-section';
 export { HeroSection } from './hero-section';

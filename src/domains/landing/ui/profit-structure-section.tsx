@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import type { MotionStyle, MotionValue } from 'framer-motion';
@@ -68,6 +69,41 @@ function PlaceholderVisual({ index }: { index: number }) {
   );
 }
 
+function CardVisual({ card, index }: { card: ProfitStructureCard; index: number }) {
+  if (!card.image) {
+    return <PlaceholderVisual index={index} />;
+  }
+
+  return (
+    <div className="absolute inset-0 overflow-hidden rounded-t-[28px] bg-black sm:rounded-t-[42px]">
+      <Image src={card.image} alt="" fill sizes="100vw" className="object-cover opacity-72" />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-linear-to-t from-black via-black/42 to-black/22"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[radial-gradient(circle_at_34%_72%,rgba(215,38,61,0.18),transparent_34%)]"
+      />
+      <div
+        aria-hidden
+        className="absolute right-6 bottom-0 font-(family-name:--font-black-han-sans) text-[132px] leading-none text-transparent sm:text-[220px]"
+        style={{ WebkitTextStroke: '1px rgba(215,38,61,0.62)' }}
+      >
+        {String(index + 1).padStart(2, '0')}
+      </div>
+      <div className="absolute top-5 right-6 font-(family-name:--font-black-han-sans) text-2xl text-[var(--color-red-400)] sm:top-8 sm:right-10 sm:text-3xl">
+        {index + 1}/03
+      </div>
+      <div className="absolute top-7 left-6 h-12 w-12 rounded-full border border-[color:var(--color-wood-500)] bg-black/35 sm:top-9 sm:left-10">
+        <span className="grid h-full w-full place-items-center font-(family-name:--font-pol-sensibility) text-2xl text-[var(--color-beige-300)]">
+          心
+        </span>
+      </div>
+    </div>
+  );
+}
+
 const CARD_TIMELINE = [
   { start: 0, end: 0.001 },
   { start: 0.34, end: 0.42 },
@@ -106,7 +142,7 @@ function StackCard({
       style={stackStyle}
       className="absolute bottom-0 left-1/2 top-[var(--stack-card-top-mobile)] w-screen -translate-x-1/2 overflow-hidden rounded-t-[28px] border border-[color:var(--color-wood-700)] bg-black shadow-[0_36px_90px_-42px_rgba(0,0,0,0.95)] sm:top-[var(--stack-card-top-desktop)] sm:rounded-t-[42px]"
     >
-      <PlaceholderVisual index={index} />
+      <CardVisual card={card} index={index} />
       <div className="absolute inset-x-0 bottom-0 z-10 px-[clamp(24px,8vw,220px)] pb-[clamp(36px,8vh,112px)]">
         <div className="mb-5 flex items-center gap-3">
           <span className="grid h-12 w-12 place-items-center rounded-full border-2 border-[color:var(--color-red-500)] bg-black/50 font-(family-name:--font-black-han-sans) text-xl text-[var(--color-red-400)]">
@@ -135,7 +171,7 @@ function StaticStack() {
           key={card.problem}
           className="relative min-h-[390px] overflow-hidden rounded-t-[28px] border border-[color:var(--color-wood-700)] bg-black"
         >
-          <PlaceholderVisual index={index} />
+          <CardVisual card={card} index={index} />
           <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-8">
             <p className="mb-4 font-(family-name:--font-black-han-sans) text-2xl text-[var(--color-red-400)]">
               {String(index + 1).padStart(2, '0')}
