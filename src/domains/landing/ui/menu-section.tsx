@@ -152,7 +152,8 @@ export function MenuSection() {
         }}
       />
       <AmbientTypeTicker
-        className="absolute inset-x-0 top-20 z-0 opacity-70 sm:top-24"
+        className="absolute inset-x-0 top-20 z-0 opacity-50 sm:top-24"
+        gap="normal"
         lines={[
           {
             text: 'SIM GOPDORITANG MENU LINEUP',
@@ -168,6 +169,8 @@ export function MenuSection() {
             direction: 'left',
           },
         ]}
+        size="small"
+        tone="gold"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">

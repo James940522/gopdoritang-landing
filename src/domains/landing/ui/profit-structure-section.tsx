@@ -242,7 +242,8 @@ export function ProfitStructureSection() {
         }}
       />
       <AmbientTypeTicker
-        className="absolute inset-x-0 top-24 z-0 opacity-80 sm:top-28"
+        className="absolute inset-x-0 top-28 z-0 opacity-60 sm:top-32"
+        gap="loose"
         lines={[
           {
             text: 'FAST KITCHEN FLOW DESIGNED FOR DELIVERY',
@@ -258,6 +259,9 @@ export function ProfitStructureSection() {
             direction: 'left',
           },
         ]}
+        size="small"
+        skew="left"
+        tone="gold"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">

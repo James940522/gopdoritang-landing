@@ -19,7 +19,8 @@ export function ContactSection() {
           className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_50%_34%,rgba(215,38,61,0.18),transparent_34%),linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.9)_100%)]"
         />
         <AmbientTypeTicker
-          className="absolute inset-x-0 top-16 z-0 opacity-60 sm:top-20"
+          className="absolute inset-x-0 top-16 z-0 opacity-45 sm:top-20"
+          gap="tight"
           lines={[
             {
               text: 'CONTACT SIM GOPDORITANG FRANCHISE',
@@ -35,6 +36,8 @@ export function ContactSection() {
               direction: 'left',
             },
           ]}
+          size="small"
+          tone="muted"
         />
 
         <div className="relative z-10 mx-auto w-full max-w-3xl px-5 sm:px-8">

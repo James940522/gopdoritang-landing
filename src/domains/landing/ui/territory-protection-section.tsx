@@ -76,7 +76,8 @@ export function TerritoryProtectionSection() {
         }}
       />
       <AmbientTypeTicker
-        className="absolute inset-x-0 top-20 z-0 opacity-80 sm:top-24"
+        className="absolute inset-x-0 top-24 z-0 opacity-55 sm:top-28"
+        gap="tight"
         lines={[
           {
             text: 'PROTECTED DELIVERY AREA',
@@ -92,6 +93,9 @@ export function TerritoryProtectionSection() {
             direction: 'left',
           },
         ]}
+        size="small"
+        skew="left"
+        tone="muted"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">

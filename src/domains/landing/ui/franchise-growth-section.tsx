@@ -137,7 +137,8 @@ export function FranchiseGrowthSection() {
         className="absolute inset-x-0 bottom-[214px] -z-10 h-12 -skew-y-2 bg-[var(--color-red-700)] sm:bottom-[252px]"
       />
       <AmbientTypeTicker
-        className="absolute inset-x-0 top-16 z-0 opacity-90 sm:top-20"
+        className="absolute inset-x-0 top-16 z-0 opacity-55 sm:top-20"
+        gap="tight"
         lines={[
           {
             text: 'SIM GOPDORITANG FRANCHISE MOMENTUM',
@@ -153,6 +154,8 @@ export function FranchiseGrowthSection() {
             direction: 'left',
           },
         ]}
+        size="large"
+        tone="red"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">

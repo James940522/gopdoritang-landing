@@ -103,7 +103,8 @@ export function FranchiseBenefitSection() {
         0
       </div>
       <AmbientTypeTicker
-        className="absolute inset-x-0 top-20 z-0 opacity-80 sm:top-24"
+        className="absolute inset-x-0 top-20 z-0 opacity-65 sm:top-24"
+        gap="loose"
         lines={[
           {
             text: 'LOWER STARTUP BURDEN FOR NEW OWNERS',
@@ -119,6 +120,9 @@ export function FranchiseBenefitSection() {
             direction: 'left',
           },
         ]}
+        size="medium"
+        skew="right"
+        tone="ember"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">
