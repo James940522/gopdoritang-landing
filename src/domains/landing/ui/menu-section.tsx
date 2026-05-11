@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { menus, type MenuItem } from '@domains/landing/model';
-import { AmbientTypeTicker } from './ambient-type-ticker';
+import { AmbientVerticalTicker } from './ambient-type-ticker';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const AUTO_SLIDE_DELAY_MS = 2800;
@@ -151,22 +151,22 @@ export function MenuSection() {
             'repeating-linear-gradient(90deg, transparent 0 46px, rgba(245,233,201,0.07) 46px 47px)',
         }}
       />
-      <AmbientTypeTicker
-        className="absolute inset-x-0 top-20 z-0 opacity-50 sm:top-24"
+      <AmbientVerticalTicker
+        className="absolute top-24 bottom-24 left-2 z-0 hidden opacity-46 sm:block lg:left-8"
         gap="normal"
         lines={[
           {
             text: 'SIM GOPDORITANG MENU LINEUP',
-            direction: 'left',
+            direction: 'up',
           },
           {
             text: 'DELIVERY FRIENDLY KOREAN COMFORT FOOD',
-            direction: 'right',
+            direction: 'down',
             variant: 'outline',
           },
           {
             text: 'GOPDORI NAKGOPSAE SIDE MENU',
-            direction: 'left',
+            direction: 'up',
           },
         ]}
         size="small"

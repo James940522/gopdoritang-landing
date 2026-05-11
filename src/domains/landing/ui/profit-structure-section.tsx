@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import type { MotionStyle, MotionValue } from 'framer-motion';
 import { profitStructureCards, type ProfitStructureCard } from '../model';
-import { AmbientTypeTicker } from './ambient-type-ticker';
+import { AmbientVerticalTicker } from './ambient-type-ticker';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -241,26 +241,25 @@ export function ProfitStructureSection() {
             'repeating-linear-gradient(90deg, transparent 0 44px, rgba(245,233,201,0.05) 44px 45px)',
         }}
       />
-      <AmbientTypeTicker
-        className="absolute inset-x-0 top-28 z-0 opacity-60 sm:top-32"
+      <AmbientVerticalTicker
+        className="absolute top-28 right-3 bottom-24 z-0 hidden opacity-55 sm:block lg:right-8"
         gap="loose"
         lines={[
           {
-            text: 'FAST KITCHEN FLOW DESIGNED FOR DELIVERY',
-            direction: 'left',
+            text: 'FAST COOKING FLOW',
+            direction: 'up',
           },
           {
-            text: 'SIMPLE MENU STRONGER OPERATIONS',
-            direction: 'right',
+            text: 'OPERATION SPEED',
+            direction: 'down',
             variant: 'outline',
           },
           {
-            text: 'PROFIT STRUCTURE BUILT INTO THE BRAND',
-            direction: 'left',
+            text: 'DELIVERY PROFIT SYSTEM',
+            direction: 'up',
           },
         ]}
         size="small"
-        skew="left"
         tone="gold"
       />
 

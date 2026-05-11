@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { territoryProtection } from '../model';
-import { AmbientTypeTicker } from './ambient-type-ticker';
+import { AmbientVerticalTicker } from './ambient-type-ticker';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -75,27 +75,26 @@ export function TerritoryProtectionSection() {
             'repeating-linear-gradient(90deg, transparent 0 48px, rgba(245,233,201,0.06) 48px 49px)',
         }}
       />
-      <AmbientTypeTicker
-        className="absolute inset-x-0 top-24 z-0 opacity-55 sm:top-28"
+      <AmbientVerticalTicker
+        className="absolute top-24 right-2 bottom-20 z-0 hidden opacity-52 sm:block lg:right-8"
         gap="tight"
         lines={[
           {
             text: 'PROTECTED DELIVERY AREA',
-            direction: 'left',
+            direction: 'up',
           },
           {
             text: 'NO OVERLAPPED SALES TERRITORY',
-            direction: 'right',
+            direction: 'down',
             variant: 'outline',
           },
           {
             text: 'STORE MANAGEMENT FOR STABLE GROWTH',
-            direction: 'left',
+            direction: 'up',
           },
         ]}
         size="small"
-        skew="left"
-        tone="muted"
+        tone="ember"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">

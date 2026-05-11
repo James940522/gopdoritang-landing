@@ -9,6 +9,12 @@ type AmbientTypeTickerLine = {
   variant?: 'solid' | 'outline';
 };
 
+type AmbientVerticalTickerLine = {
+  text: string;
+  direction: 'up' | 'down';
+  variant?: 'solid' | 'outline';
+};
+
 type AmbientTypeTickerProps = {
   lines: readonly AmbientTypeTickerLine[];
   className?: string;
@@ -16,6 +22,10 @@ type AmbientTypeTickerProps = {
   size?: 'small' | 'medium' | 'large';
   skew?: 'left' | 'right';
   tone?: 'red' | 'ember' | 'gold' | 'muted';
+};
+
+type AmbientVerticalTickerProps = Omit<AmbientTypeTickerProps, 'lines' | 'skew'> & {
+  lines: readonly AmbientVerticalTickerLine[];
 };
 
 const toneStyles = {
@@ -53,6 +63,33 @@ const gapClasses = {
   loose: 'space-y-5 sm:space-y-7',
 } as const;
 
+const columnGapClasses = {
+  tight: 'gap-x-2 sm:gap-x-3',
+  normal: 'gap-x-3 sm:gap-x-5',
+  loose: 'gap-x-5 sm:gap-x-7',
+} as const;
+
+function getTickerTextStyle({
+  isOutline,
+  tone,
+}: {
+  isOutline: boolean;
+  tone: NonNullable<AmbientTypeTickerProps['tone']>;
+}): CSSProperties {
+  const colors = toneStyles[tone];
+
+  return isOutline
+    ? {
+        WebkitTextStroke: colors.stroke,
+        color: 'transparent',
+        filter: colors.shadow,
+      }
+    : {
+        color: colors.solid,
+        filter: colors.shadow,
+      };
+}
+
 function TickerLine({
   line,
   index,
@@ -68,17 +105,7 @@ function TickerLine({
   const isOutline = line.variant === 'outline';
   const duration = 30 + index * 7 + (size === 'large' ? 8 : 0);
   const animateX = line.direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'];
-  const colors = toneStyles[tone];
-  const textStyle: CSSProperties = isOutline
-    ? {
-        WebkitTextStroke: colors.stroke,
-        color: 'transparent',
-        filter: colors.shadow,
-      }
-    : {
-        color: colors.solid,
-        filter: colors.shadow,
-      };
+  const textStyle = getTickerTextStyle({ isOutline, tone });
 
   const content = (
     <div className="flex shrink-0 items-center">
@@ -114,6 +141,60 @@ function TickerLine({
   );
 }
 
+function VerticalTickerLine({
+  line,
+  index,
+  size,
+  tone,
+}: {
+  line: AmbientVerticalTickerLine;
+  index: number;
+  size: NonNullable<AmbientTypeTickerProps['size']>;
+  tone: NonNullable<AmbientTypeTickerProps['tone']>;
+}) {
+  const shouldReduceMotion = useReducedMotion();
+  const isOutline = line.variant === 'outline';
+  const duration = 38 + index * 8 + (size === 'large' ? 10 : 0);
+  const animateY = line.direction === 'up' ? ['0%', '-50%'] : ['-50%', '0%'];
+  const textStyle = getTickerTextStyle({ isOutline, tone });
+
+  const content = (
+    <div className="flex shrink-0 flex-col items-center gap-7">
+      {Array.from({ length: 5 }).map((_, repeatIndex) => (
+        <span
+          key={repeatIndex}
+          className="py-4 [text-orientation:mixed] [writing-mode:vertical-rl]"
+        >
+          {line.text}
+        </span>
+      ))}
+    </div>
+  );
+
+  return (
+    <div
+      className={[
+        'h-full overflow-hidden font-(family-name:--font-black-han-sans) leading-none tracking-normal whitespace-nowrap uppercase',
+        sizeClasses[size],
+      ].join(' ')}
+      style={textStyle}
+    >
+      {shouldReduceMotion ? (
+        <div className="flex h-max flex-col items-center">{content}</div>
+      ) : (
+        <motion.div
+          className="flex h-max flex-col items-center"
+          animate={{ y: animateY }}
+          transition={{ duration, ease: 'linear', repeat: Infinity }}
+        >
+          {content}
+          {content}
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
 export function AmbientTypeTicker({
   lines,
   className,
@@ -137,6 +218,37 @@ export function AmbientTypeTicker({
       <div className={gapClasses[gap]}>
         {lines.map((line, index) => (
           <TickerLine
+            key={`${line.text}-${index}`}
+            line={line}
+            index={index}
+            size={size}
+            tone={tone}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function AmbientVerticalTicker({
+  lines,
+  className,
+  gap = 'normal',
+  size = 'small',
+  tone = 'red',
+}: AmbientVerticalTickerProps) {
+  return (
+    <div
+      aria-hidden
+      className={['pointer-events-none select-none overflow-hidden py-3', className]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      <div
+        className={['flex h-full items-stretch justify-center', columnGapClasses[gap]].join(' ')}
+      >
+        {lines.map((line, index) => (
+          <VerticalTickerLine
             key={`${line.text}-${index}`}
             line={line}
             index={index}
