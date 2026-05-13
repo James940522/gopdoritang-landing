@@ -81,7 +81,23 @@ function CardVisual({ card, index }: { card: ProfitStructureCard; index: number 
         alt=""
         fill
         sizes="100vw"
-        className="h-full w-full scale-[1.03] object-cover object-center opacity-100"
+        className="scale-110 object-cover object-center opacity-55 blur-xl sm:hidden"
+      />
+      <div className="absolute inset-x-0 top-8 bottom-[30%] sm:hidden">
+        <Image
+          src={card.image}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-contain object-center opacity-100"
+        />
+      </div>
+      <Image
+        src={card.image}
+        alt=""
+        fill
+        sizes="100vw"
+        className="hidden h-full w-full scale-[1.03] object-cover object-center opacity-100 sm:block"
       />
       <div
         aria-hidden
