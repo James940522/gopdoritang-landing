@@ -8,16 +8,14 @@ export function ContactSection() {
     <section id="contact" className="relative isolate overflow-hidden bg-black text-white">
       <div className="relative min-h-dvh py-24 sm:py-28 lg:py-32">
         <Image
-          src="/asset/sec-9/bg.webp"
+          src="/asset/sec-9/contact-bg.webp"
           alt=""
           fill
           sizes="100vw"
-          className="-z-30 object-cover opacity-42"
+          className="-z-30 object-cover object-center"
+          unoptimized
         />
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_50%_34%,rgba(215,38,61,0.18),transparent_34%),linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.9)_100%)]"
-        />
+        <div aria-hidden className="absolute inset-0 -z-20 bg-black/30" />
         <AmbientTypeTicker
           className="absolute inset-x-0 top-16 z-0 opacity-45 sm:top-20"
           gap="tight"

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
 import { mapoMonthlySalesSummary, mapoSalesMetrics, mapoSalesTotal } from '../model';
 
@@ -356,28 +357,15 @@ export function MapoSalesDashboardSection() {
       id="mapo-sales-dashboard"
       className="relative isolate overflow-hidden bg-[var(--color-surface-900)] py-24 text-white sm:py-32 lg:py-40"
     >
-      <div
+      <Image
+        src="/asset/sec-4/mapo-sales-bg.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="absolute inset-0 -z-30 object-cover object-center"
         aria-hidden
-        className="absolute inset-0 -z-30"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 16% 24%, rgba(215,38,61,0.28), transparent 30%), radial-gradient(circle at 78% 18%, rgba(180,124,80,0.32), transparent 26%), linear-gradient(180deg, var(--color-surface-900) 0%, #260c09 48%, var(--color-surface-900) 100%)',
-        }}
       />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-20 opacity-20"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(90deg, transparent 0 46px, rgba(245,233,201,0.07) 46px 47px)',
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute top-8 right-[6%] -z-10 font-(family-name:--font-black-han-sans) text-[190px] leading-none text-[rgba(73,8,15,0.24)] sm:top-12 sm:text-[300px]"
-      >
-        4M
-      </div>
+      <div aria-hidden className="absolute inset-0 -z-20 bg-black/35" />
 
       <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8">
         <motion.header

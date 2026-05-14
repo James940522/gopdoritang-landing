@@ -1,5 +1,6 @@
 import { BrandStorySection } from './brand-story-section';
 import { ContactSection } from './contact-section';
+import { FloatingActionButtons } from './floating-action-buttons';
 import { FranchiseBenefitSection } from './franchise-benefit-section';
 import { FranchiseGrowthSection } from './franchise-growth-section';
 import { HeroSection } from './hero-section';
@@ -26,6 +27,7 @@ export function LandingPage() {
         <MenuSection />
         <ContactSection />
       </main>
+      <FloatingActionButtons />
     </>
   );
 }

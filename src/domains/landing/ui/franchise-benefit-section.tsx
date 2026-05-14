@@ -1,8 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { franchiseBenefitRows, type FranchiseBenefitRow } from '../model';
-import { AmbientTypeTicker } from './ambient-type-ticker';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -337,50 +337,15 @@ export function FranchiseBenefitSection() {
       id="franchise-benefit"
       className="relative isolate overflow-hidden bg-[var(--color-surface-900)] py-24 text-white sm:py-32 lg:py-40"
     >
-      <div
+      <Image
+        src="/asset/sec-6/franchise-benefit-bg.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="absolute inset-0 -z-30 object-cover object-center"
         aria-hidden
-        className="absolute inset-0 -z-30"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 18% 22%, rgba(215,38,61,0.26), transparent 28%), radial-gradient(circle at 86% 20%, rgba(180,124,80,0.24), transparent 28%), linear-gradient(180deg, var(--color-surface-900) 0%, var(--color-surface-800) 48%, var(--color-surface-900) 100%)',
-        }}
       />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-20 opacity-[0.24]"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(90deg, transparent 0 46px, rgba(245,233,201,0.06) 46px 47px)',
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute -right-16 top-24 -z-10 font-(family-name:--font-black-han-sans) text-[180px] leading-none text-[rgba(215,38,61,0.12)] sm:text-[300px]"
-      >
-        0
-      </div>
-      <AmbientTypeTicker
-        className="absolute inset-x-0 top-20 z-0 opacity-65 sm:top-24"
-        gap="loose"
-        lines={[
-          {
-            text: 'LOWER STARTUP BURDEN FOR NEW OWNERS',
-            direction: 'left',
-          },
-          {
-            text: 'WAIVED FEES CLEAR COST GUIDE',
-            direction: 'right',
-            variant: 'outline',
-          },
-          {
-            text: 'PREPARE ONLY WHAT YOUR STORE NEEDS',
-            direction: 'left',
-          },
-        ]}
-        size="medium"
-        skew="right"
-        tone="ember"
-      />
+      <div aria-hidden className="absolute inset-0 -z-20 bg-black/15" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">
         <motion.header
@@ -391,16 +356,16 @@ export function FranchiseBenefitSection() {
           className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end"
         >
           <div>
-            <p className="mb-5 font-(family-name:--font-noto-sans-kr) text-[11px] font-black tracking-[0.34em] text-[var(--color-red-500)] sm:text-xs">
+            <p className="mb-5 font-(family-name:--font-noto-sans-kr) text-[11px] font-black tracking-[0.34em] text-[var(--color-red-300)] [text-shadow:0_2px_12px_rgba(0,0,0,0.95)] sm:text-xs">
               STARTUP BENEFIT
             </p>
-            <h2 className="font-(family-name:--font-black-han-sans) text-4xl leading-[1.06] text-white sm:text-6xl md:text-7xl">
+            <h2 className="font-(family-name:--font-black-han-sans) text-4xl leading-[1.06] text-white [text-shadow:0_5px_22px_rgba(0,0,0,0.98)] sm:text-6xl md:text-7xl">
               초기 부담은 낮추고
               <br />
               <span className="text-[var(--color-beige-100)]">필요한 것만 준비</span>
             </h2>
           </div>
-          <p className="max-w-2xl font-(family-name:--font-noto-sans-kr) text-base leading-[1.8] font-bold text-[var(--color-beige-500)] sm:text-lg lg:justify-self-end">
+          <p className="max-w-2xl font-(family-name:--font-noto-sans-kr) text-base leading-[1.8] font-black text-white [text-shadow:0_3px_14px_rgba(0,0,0,0.98)] sm:text-lg lg:justify-self-end">
             심 곱도리탕은 불필요한 초기 비용을 줄이고, 점주님 상황에 맞춰 준비할 수 있도록 창업
             항목을 투명하게 안내합니다.
           </p>
@@ -418,7 +383,7 @@ export function FranchiseBenefitSection() {
           <MobileBenefitTable />
         </motion.div>
 
-        <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-xs leading-[1.7] font-bold text-[var(--color-beige-500)]">
+        <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-xs leading-[1.7] font-black text-white/85 [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
           * 계약 조건 및 시점에 따라 혜택 내용은 달라질 수 있습니다. 계약이행보증금은 별도 안내되며
           계약 해지 시 조건에 따라 반환됩니다.
         </p>
