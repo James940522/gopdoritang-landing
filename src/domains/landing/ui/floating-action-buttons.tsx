@@ -43,7 +43,7 @@ export function FloatingActionButtons() {
     <AnimatePresence>
       {isVisible ? (
         <motion.div
-          className="fixed right-4 bottom-5 z-[70] flex flex-col items-center sm:right-6 sm:bottom-7 lg:right-8 lg:bottom-8"
+          className="fixed right-4 bottom-5 z-[70] flex flex-col items-center gap-3 sm:right-6 sm:bottom-7 sm:gap-4 lg:right-8 lg:bottom-8"
           initial={shouldReduceMotion ? false : { opacity: 0, y: 18, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 14, scale: 0.94 }}
@@ -79,7 +79,7 @@ export function FloatingActionButtons() {
             onClick={scrollToTop}
             whileHover={shouldReduceMotion ? undefined : { y: 3, scale: 1.04 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-            className="group relative -mt-2 grid h-[76px] w-[76px] place-items-center overflow-hidden rounded-full border border-[#d6a84f]/38 bg-[linear-gradient(145deg,#1e1813_0%,#0f0c0a_62%,#271709_100%)] font-(family-name:--font-black-han-sans) text-[22px] leading-none text-[var(--color-beige-100)] shadow-[0_18px_38px_-22px_rgba(214,168,79,0.64),0_10px_26px_rgba(0,0,0,0.56)] transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5e9c9] sm:h-[92px] sm:w-[92px] sm:text-[27px]"
+            className="group relative grid h-[76px] w-[76px] place-items-center overflow-hidden rounded-full border border-[#d6a84f]/38 bg-[linear-gradient(145deg,#1e1813_0%,#0f0c0a_62%,#271709_100%)] font-(family-name:--font-black-han-sans) text-[22px] leading-none text-[var(--color-beige-100)] shadow-[0_18px_38px_-22px_rgba(214,168,79,0.64),0_10px_26px_rgba(0,0,0,0.56)] transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5e9c9] sm:h-[92px] sm:w-[92px] sm:text-[27px]"
           >
             <span
               aria-hidden

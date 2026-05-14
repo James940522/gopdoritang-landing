@@ -64,7 +64,7 @@ function AmountCell({
           className={[
             'relative grid place-items-center border-2 border-[color:var(--color-red-500)] bg-[rgba(215,38,61,0.08)] font-(family-name:--font-black-han-sans) leading-none text-[var(--color-red-500)] shadow-[0_18px_34px_-22px_rgba(215,38,61,0.95)]',
             isMobile
-              ? 'h-9 w-[54px] rounded-[5px] min-[380px]:h-10 min-[380px]:w-[62px]'
+              ? 'h-8 w-[48px] rounded-[5px] min-[380px]:h-9 min-[380px]:w-[56px]'
               : isCompact
                 ? 'h-10 w-[66px] rounded-[5px] md:h-11 md:w-[74px]'
                 : 'h-11 w-[72px] rounded-[5px] sm:h-[58px] sm:w-[96px] sm:rounded-md',
@@ -101,7 +101,7 @@ function AmountCell({
             aria-hidden
             className={
               isMobile
-                ? 'text-[22px] min-[380px]:text-[25px]'
+                ? 'text-[20px] min-[380px]:text-[23px]'
                 : isCompact
                   ? 'text-[24px] md:text-[27px]'
                   : 'text-[26px] sm:text-[34px]'
@@ -125,7 +125,7 @@ function AmountCell({
       className={[
         'block font-(family-name:--font-black-han-sans) leading-[1.15] break-keep text-[var(--color-beige-100)]',
         isMobile
-          ? 'text-[11px] min-[380px]:text-xs'
+          ? 'text-[9.5px] min-[380px]:text-[10.5px]'
           : isCompact
             ? 'text-[13px] md:text-base'
             : 'text-sm sm:text-2xl sm:leading-none',
@@ -261,14 +261,14 @@ function MobileBenefitTable() {
     <div className="md:hidden" role="table" aria-label="창업 혜택 비용 안내">
       <div
         role="row"
-        className="grid grid-cols-[23%_minmax(0,1fr)_24%] bg-black text-[var(--color-beige-100)]"
+        className="grid grid-cols-[21%_minmax(0,1fr)_23%] bg-black text-[var(--color-beige-100)]"
       >
         {['구분', '내용', '금액'].map((label, index) => (
           <div
             key={label}
             role="columnheader"
             className={[
-              'px-2 py-4 text-center font-(family-name:--font-black-han-sans) text-[22px] leading-none font-normal min-[380px]:text-2xl',
+              'px-1.5 py-3.5 text-center font-(family-name:--font-black-han-sans) text-[18px] leading-none font-normal min-[380px]:text-xl',
               index === 1 ? 'border-x border-white/35' : '',
             ].join(' ')}
           >
@@ -284,45 +284,47 @@ function MobileBenefitTable() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5, delay: index * 0.04, ease: EASE }}
-          className="grid grid-cols-[23%_minmax(0,1fr)_24%] border-b border-[color:var(--color-wood-800)] last:border-b-0"
+          className="grid min-h-[76px] grid-cols-[21%_minmax(0,1fr)_23%] border-b border-[color:var(--color-wood-800)] last:border-b-0"
         >
           <div
             role="cell"
-            className="grid place-items-center bg-[var(--color-surface-800)] px-1.5 py-4 text-center font-(family-name:--font-black-han-sans) text-[clamp(18px,5.9vw,24px)] leading-[1.08] break-keep text-white"
+            className="grid place-items-center bg-[var(--color-surface-800)] px-1 py-3.5 text-center font-(family-name:--font-black-han-sans) text-[clamp(14px,4.35vw,18px)] leading-[1.1] tracking-[-0.02em] break-keep text-white"
           >
             {row.category}
           </div>
           <div
             role="cell"
-            className="bg-[rgba(245,233,201,0.94)] px-2.5 py-4 text-center text-[var(--color-surface-900)] min-[380px]:px-3"
+            className="grid place-items-center bg-[rgba(245,233,201,0.94)] px-2.5 py-3.5 text-center text-[var(--color-surface-900)] min-[380px]:px-3"
           >
-            <p className="font-(family-name:--font-noto-sans-kr) text-[12px] leading-[1.42] font-black break-keep min-[380px]:text-[13px]">
-              {row.content}
-            </p>
-            {row.note ? (
-              <p className="mt-1.5 text-[10px] leading-[1.35] font-bold text-[var(--color-surface-300)] min-[380px]:text-[11px]">
-                {row.note}
+            <div>
+              <p className="font-(family-name:--font-noto-sans-kr) text-[10.5px] leading-[1.46] font-black tracking-[-0.01em] break-keep min-[380px]:text-[11.5px]">
+                {row.content}
               </p>
-            ) : null}
+              {row.note ? (
+                <p className="mt-1 text-[9px] leading-[1.35] font-bold text-[var(--color-surface-300)] min-[380px]:text-[10px]">
+                  {row.note}
+                </p>
+              ) : null}
+            </div>
           </div>
           <div
             role="cell"
-            className="grid place-items-center bg-[var(--color-surface-800)] px-1.5 py-4 text-center"
+            className="grid place-items-center bg-[var(--color-surface-800)] px-1 py-3.5 text-center"
           >
             <AmountCell amount={row.amount} index={index} size="mobile" />
           </div>
         </motion.div>
       ))}
-      <div role="row" className="grid grid-cols-[1fr_24%]">
+      <div role="row" className="grid grid-cols-[1fr_23%]">
         <div
           role="cell"
-          className="bg-black px-3 py-5 text-center font-(family-name:--font-black-han-sans) text-[22px] leading-none text-[var(--color-beige-300)] min-[380px]:text-2xl"
+          className="bg-black px-3 py-[18px] text-center font-(family-name:--font-black-han-sans) text-[19px] leading-none text-[var(--color-beige-300)] min-[380px]:text-[21px]"
         >
           최종 창업비용
         </div>
         <div
           role="cell"
-          className="grid place-items-center bg-[var(--color-beige-100)] px-1.5 py-5 text-center font-(family-name:--font-black-han-sans) text-[15px] leading-[1.12] break-keep text-[var(--color-surface-900)] min-[380px]:text-base"
+          className="grid place-items-center bg-[var(--color-beige-100)] px-1 py-[18px] text-center font-(family-name:--font-black-han-sans) text-[12px] leading-[1.12] break-keep text-[var(--color-surface-900)] min-[380px]:text-[13px]"
         >
           상담시 안내
         </div>

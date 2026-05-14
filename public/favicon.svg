@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="심 곱도리탕">
+  <rect width="64" height="64" rx="14" fill="#1a1208"/>
+  <circle cx="32" cy="32" r="24" fill="#7f1d1d" opacity="0.72"/>
+  <path d="M31.9 12.5c9.5 0 17.6 5 20.2 12.3H11.8c2.6-7.3 10.7-12.3 20.1-12.3Z" fill="#D6A84F"/>
+  <path d="M18.5 26.5h27c-.7 8.8-6.1 15.8-13.5 15.8s-12.8-7-13.5-15.8Z" fill="#FFF3E0"/>
+  <path d="M24 24.9c2.3-3.1 4.9-5.5 7.9-7.2 3 1.7 5.7 4.1 8 7.2" fill="none" stroke="#1a1208" stroke-width="3" stroke-linecap="round"/>
+  <text x="32" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#D6A84F" font-family="serif">心</text>
+</svg>

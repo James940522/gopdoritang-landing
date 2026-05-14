@@ -77,21 +77,12 @@ function CardVisual({ card, index }: { card: ProfitStructureCard; index: number 
   return (
     <div className="absolute inset-0 overflow-hidden rounded-t-[28px] bg-black sm:rounded-t-[42px]">
       <Image
-        src={card.image}
+        src={card.mobileImage ?? card.image}
         alt=""
         fill
         sizes="100vw"
-        className="scale-110 object-cover object-center opacity-55 blur-xl sm:hidden"
+        className="object-cover object-center opacity-100 sm:hidden"
       />
-      <div className="absolute inset-x-0 top-8 bottom-[30%] sm:hidden">
-        <Image
-          src={card.image}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-contain object-center opacity-100"
-        />
-      </div>
       <Image
         src={card.image}
         alt=""
