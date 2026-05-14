@@ -1,61 +1,94 @@
+import { createHmac, randomUUID } from 'crypto';
 import { companyInfo, formatContactPhone, type ContactFormValues } from '../model';
 
-export type ContactNotificationResult =
-  | {
-      status: 'sent';
-      provider: 'webhook';
-    }
-  | {
-      status: 'skipped';
-      reason: 'missing-webhook-url';
-    };
+export type ContactNotificationResult = {
+  status: 'sent';
+  provider: 'solapi';
+  messageId?: string;
+  groupId?: string;
+};
+
+type SolapiSendResponse = {
+  messageId?: string;
+  groupId?: string;
+};
+
+function readRequiredEnv(name: 'SOLAPI_API_KEY' | 'SOLAPI_API_SECRET' | 'SMS_TO' | 'SMS_FROM') {
+  const value = process.env[name]?.trim();
+
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+
+  return value;
+}
+
+function normalizePhone(input: string) {
+  return input.replace(/[^\d]/g, '');
+}
+
+function createSolapiAuthHeader(apiKey: string, apiSecret: string) {
+  const date = new Date().toISOString();
+  const salt = randomUUID();
+  const signature = createHmac('sha256', apiSecret)
+    .update(date + salt)
+    .digest('hex');
+
+  return `HMAC-SHA256 apiKey=${apiKey}, date=${date}, salt=${salt}, signature=${signature}`;
+}
+
+function createSmsText(values: ContactFormValues) {
+  const phone = normalizePhone(formatContactPhone(values));
+  const source = values.referralSources.join(', ');
+  const domain = values.domain?.trim() || '-';
+
+  return `[${companyInfo.brandName} 창업문의]
+문의자: ${values.name.trim()}
+연락처: ${phone}
+희망지역: ${values.desiredRegion.trim()}
+예상비용: ${values.expectedBudget.trim()}
+유입경로: ${source}
+도메인: ${domain}
+
+문의내용:
+${values.inquiryDetail.trim() || '-'}`.slice(0, 1000);
+}
 
 export async function sendContactNotification(
   values: ContactFormValues,
 ): Promise<ContactNotificationResult> {
-  const webhookUrl = process.env.CONTACT_SMS_WEBHOOK_URL;
+  const apiKey = readRequiredEnv('SOLAPI_API_KEY');
+  const apiSecret = readRequiredEnv('SOLAPI_API_SECRET');
+  const to = normalizePhone(readRequiredEnv('SMS_TO'));
+  const from = normalizePhone(readRequiredEnv('SMS_FROM'));
 
-  if (!webhookUrl) {
-    console.info('[contact-form] SMS webhook is not configured.', {
-      brand: companyInfo.brandName,
-      name: values.name,
-      phone: formatContactPhone(values),
-      desiredRegion: values.desiredRegion,
-    });
-
-    return {
-      status: 'skipped',
-      reason: 'missing-webhook-url',
-    };
-  }
-
-  const response = await fetch(webhookUrl, {
+  const response = await fetch('https://api.solapi.com/messages/v4/send', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(process.env.CONTACT_SMS_WEBHOOK_SECRET
-        ? { Authorization: `Bearer ${process.env.CONTACT_SMS_WEBHOOK_SECRET}` }
-        : {}),
+      Authorization: createSolapiAuthHeader(apiKey, apiSecret),
     },
     body: JSON.stringify({
-      brand: companyInfo.brandName,
-      company: companyInfo.companyName,
-      name: values.name,
-      phone: formatContactPhone(values),
-      desiredRegion: values.desiredRegion,
-      expectedBudget: values.expectedBudget,
-      inquiryDetail: values.inquiryDetail,
-      referralSources: values.referralSources,
-      submittedAt: new Date().toISOString(),
+      message: {
+        to,
+        from,
+        text: createSmsText(values),
+      },
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`SMS webhook failed with ${response.status}`);
+    const errorText = await response.text();
+    console.error('[contact-form] Solapi send failed', errorText);
+    throw new Error(`Solapi send failed with ${response.status}`);
   }
+
+  const result = (await response.json().catch(() => null)) as SolapiSendResponse | null;
 
   return {
     status: 'sent',
-    provider: 'webhook',
+    provider: 'solapi',
+    messageId: result?.messageId,
+    groupId: result?.groupId,
   };
 }

@@ -31,6 +31,8 @@ export const contactFormSchema = z.object({
   privacyAgreed: z.literal(true, {
     error: '개인정보 수집 및 이용에 동의해 주세요.',
   }),
+  hp: z.string().optional(),
+  domain: z.string().optional(),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;

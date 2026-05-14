@@ -39,6 +39,8 @@ export function ContactForm() {
       expectedBudget: '',
       inquiryDetail: '',
       referralSources: [],
+      hp: '',
+      domain: '',
     },
   });
 
@@ -51,7 +53,10 @@ export function ContactForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        ...values,
+        domain: window.location.hostname,
+      }),
     });
 
     const result = (await response.json()) as { message?: string };
@@ -74,6 +79,14 @@ export function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="rounded-lg border border-white/10 bg-black/58 p-5 shadow-[0_34px_100px_-52px_rgba(0,0,0,0.95)] backdrop-blur-md sm:p-8 lg:p-10"
     >
+      <input
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+        {...register('hp')}
+      />
       <div className="grid gap-5">
         <div>
           <label htmlFor="contact-name" className={labelClassName}>
