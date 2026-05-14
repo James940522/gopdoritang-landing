@@ -56,9 +56,17 @@ export function FloatingActionButtons() {
             onClick={scrollToContact}
             whileHover={shouldReduceMotion ? undefined : { y: -3, scale: 1.04 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-            className="grid h-[76px] w-[76px] place-items-center rounded-full border border-white/20 bg-[#ff6a16] font-(family-name:--font-black-han-sans) text-[21px] leading-[1.04] text-white shadow-[0_18px_36px_-20px_rgba(255,106,22,0.95),0_8px_24px_rgba(0,0,0,0.42)] transition hover:bg-[#ff7a22] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5e9c9] sm:h-[92px] sm:w-[92px] sm:text-[25px]"
+            className="group relative grid h-[76px] w-[76px] place-items-center overflow-hidden rounded-full border border-[#f5e9c9]/28 bg-[linear-gradient(145deg,#b11f33_0%,#6a1320_58%,#3d2613_100%)] font-(family-name:--font-black-han-sans) text-[20px] leading-[1.04] text-white shadow-[0_18px_42px_-22px_rgba(177,31,51,0.95),0_10px_26px_rgba(0,0,0,0.52)] transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5e9c9] sm:h-[92px] sm:w-[92px] sm:text-[24px]"
           >
-            <span>
+            <span
+              aria-hidden
+              className="absolute inset-[7px] rounded-full border border-[#f5e9c9]/16 transition group-hover:border-[#f5e9c9]/28"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-[radial-gradient(circle_at_35%_20%,rgba(255,217,160,0.22),transparent_38%)] opacity-80"
+            />
+            <span className="relative drop-shadow-[0_2px_8px_rgba(0,0,0,0.32)]">
               창업
               <br />
               문의
@@ -71,12 +79,20 @@ export function FloatingActionButtons() {
             onClick={scrollToTop}
             whileHover={shouldReduceMotion ? undefined : { y: 3, scale: 1.04 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-            className="-mt-2 grid h-[76px] w-[76px] place-items-center rounded-full border border-[#f5e9c9]/18 bg-[#006356] font-(family-name:--font-black-han-sans) text-[23px] leading-none text-[var(--color-beige-100)] shadow-[0_18px_38px_-22px_rgba(0,99,86,0.92),0_8px_24px_rgba(0,0,0,0.42)] transition hover:bg-[#007262] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5e9c9] sm:h-[92px] sm:w-[92px] sm:text-[28px]"
+            className="group relative -mt-2 grid h-[76px] w-[76px] place-items-center overflow-hidden rounded-full border border-[#d6a84f]/38 bg-[linear-gradient(145deg,#1e1813_0%,#0f0c0a_62%,#271709_100%)] font-(family-name:--font-black-han-sans) text-[22px] leading-none text-[var(--color-beige-100)] shadow-[0_18px_38px_-22px_rgba(214,168,79,0.64),0_10px_26px_rgba(0,0,0,0.56)] transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5e9c9] sm:h-[92px] sm:w-[92px] sm:text-[27px]"
           >
-            <span className="flex flex-col items-center gap-1">
+            <span
+              aria-hidden
+              className="absolute inset-[7px] rounded-full border border-[#d6a84f]/18 transition group-hover:border-[#d6a84f]/34"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-[radial-gradient(circle_at_45%_18%,rgba(214,168,79,0.18),transparent_42%)]"
+            />
+            <span className="relative flex flex-col items-center gap-1">
               <span
                 aria-hidden="true"
-                className="grid h-6 w-6 place-items-center rounded-full border border-[#ff8a22] text-sm text-[#ff8a22] sm:h-7 sm:w-7 sm:text-base"
+                className="grid h-6 w-6 place-items-center rounded-full border border-[#d6a84f]/74 text-sm text-[#d6a84f] sm:h-7 sm:w-7 sm:text-base"
               >
                 心
               </span>
