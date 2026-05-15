@@ -20,6 +20,10 @@ const labelClassName =
 const errorClassName =
   'mt-1.5 font-(family-name:--font-noto-sans-kr) text-xs font-bold text-[var(--color-red-300)]';
 
+type ContactSubmitResponse = {
+  message?: string;
+};
+
 export function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
@@ -48,30 +52,37 @@ export function ContactForm() {
     setSubmitStatus('idle');
     setSubmitMessage('');
 
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...values,
-        domain: window.location.hostname,
-      }),
-    });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...values,
+          domain: window.location.hostname,
+        }),
+      });
 
-    const result = (await response.json()) as { message?: string };
+      const result = (await response.json().catch(() => ({}))) as ContactSubmitResponse;
 
-    if (!response.ok) {
-      setSubmitStatus('error');
+      if (!response.ok) {
+        setSubmitStatus('error');
+        setSubmitMessage(
+          result.message ?? '문의 접수 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.',
+        );
+        return;
+      }
+
+      setSubmitStatus('success');
       setSubmitMessage(
-        result.message ?? '문의 접수 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.',
+        result.message ?? '문의가 접수되었습니다. 담당자가 확인 후 연락드리겠습니다.',
       );
-      return;
+      reset();
+    } catch {
+      setSubmitStatus('error');
+      setSubmitMessage('네트워크 연결이 불안정합니다. 잠시 후 다시 시도해 주세요.');
     }
-
-    setSubmitStatus('success');
-    setSubmitMessage(result.message ?? '문의가 접수되었습니다. 담당자가 확인 후 연락드리겠습니다.');
-    reset();
   };
 
   return (

@@ -39,19 +39,20 @@ function createSolapiAuthHeader(apiKey: string, apiSecret: string) {
 
 function createSmsText(values: ContactFormValues) {
   const phone = normalizePhone(formatContactPhone(values));
-  const source = values.referralSources.join(', ');
+  const source = values.referralSources.length > 0 ? values.referralSources.join(', ') : '-';
   const domain = values.domain?.trim() || '-';
+  const inquiryDetail = values.inquiryDetail.trim() || '-';
 
   return `[${companyInfo.brandName} 창업문의]
-문의자: ${values.name.trim()}
+성함: ${values.name.trim()}
 연락처: ${phone}
-희망지역: ${values.desiredRegion.trim()}
-예상비용: ${values.expectedBudget.trim()}
-유입경로: ${source}
-도메인: ${domain}
+창업 희망 지역: ${values.desiredRegion.trim()}
+예상 창업 비용: ${values.expectedBudget.trim()}
+방문 유입 경로: ${source}
+접수 도메인: ${domain}
 
-문의내용:
-${values.inquiryDetail.trim() || '-'}`.slice(0, 1000);
+문의 내용:
+${inquiryDetail}`.slice(0, 1000);
 }
 
 export async function sendContactNotification(
