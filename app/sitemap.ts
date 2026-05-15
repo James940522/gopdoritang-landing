@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { SITE_ORIGIN } from '@shared/config/site';
+import { OG_IMAGES, SITE_ORIGIN } from '@shared/config/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
+      images: OG_IMAGES.map((image) => image.url),
     },
   ];
 }

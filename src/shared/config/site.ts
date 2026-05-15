@@ -1,5 +1,7 @@
 export const SITE_ORIGIN = (
-  process.env.NEXT_PUBLIC_SITE_ORIGIN ?? 'https://www.simgopdoritang.com'
+  process.env.NEXT_PUBLIC_SITE_ORIGIN ??
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  'https://www.simgopdoritang.com'
 ).replace(/\/$/, '');
 
 export const absoluteUrl = (path: string): string => new URL(path, `${SITE_ORIGIN}/`).toString();

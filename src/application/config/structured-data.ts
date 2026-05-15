@@ -39,5 +39,41 @@ export const siteStructuredData = {
         '@id': absoluteUrl('/#organization'),
       },
     },
+    {
+      '@type': 'WebPage',
+      '@id': absoluteUrl('/#webpage'),
+      url: SITE_ORIGIN,
+      name: '심 곱도리탕 창업 | 프리미엄 곱도리탕 프랜차이즈',
+      description:
+        '곱도리탕부터 닭도리탕, 낙곱새까지 배달 매출에 강한 프리미엄 한식 프랜차이즈 심 곱도리탕 창업 안내 페이지입니다.',
+      inLanguage: 'ko-KR',
+      isPartOf: {
+        '@id': absoluteUrl('/#website'),
+      },
+      about: {
+        '@id': absoluteUrl('/#brand'),
+      },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: OG_IMAGES[0].url,
+        width: 1200,
+        height: 630,
+      },
+      breadcrumb: {
+        '@id': absoluteUrl('/#breadcrumb'),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': absoluteUrl('/#breadcrumb'),
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: '심 곱도리탕 창업',
+          item: SITE_ORIGIN,
+        },
+      ],
+    },
   ],
 } as const;

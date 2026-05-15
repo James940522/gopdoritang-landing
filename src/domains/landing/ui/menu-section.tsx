@@ -28,6 +28,9 @@ function MenuCard({ item, index }: { item: MenuItem; index: number }) {
         src={item.image}
         alt={`${item.name} 메뉴 이미지`}
         fill
+        unoptimized
+        loading="lazy"
+        decoding="async"
         sizes="(max-width: 640px) 78vw, (max-width: 1024px) 360px, 396px"
         className="object-cover transition duration-700 group-hover:scale-105"
       />
