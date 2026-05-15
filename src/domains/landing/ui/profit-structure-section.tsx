@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import type { MotionStyle, MotionValue } from 'framer-motion';
 import { profitStructureCards, type ProfitStructureCard } from '../model';
@@ -130,6 +130,24 @@ type StackCardStyle = MotionStyle & {
   zIndex: number;
 };
 
+function useCanRunScrollStack() {
+  const [canRun, setCanRun] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    const update = () => setCanRun(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener('change', update);
+
+    return () => {
+      mediaQuery.removeEventListener('change', update);
+    };
+  }, []);
+
+  return canRun;
+}
+
 function StackCard({
   card,
   index,
@@ -202,21 +220,15 @@ function StaticStack() {
   );
 }
 
-function ScrollStack() {
-  const shouldReduceMotion = useReducedMotion();
+function AnimatedScrollStack() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ['start start', 'end end'],
   });
 
-  if (shouldReduceMotion) return <StaticStack />;
-
   return (
-    <div
-      ref={targetRef}
-      className="relative left-1/2 mt-16 h-[820vh] w-screen -translate-x-1/2 sm:mt-20 sm:h-[880vh]"
-    >
+    <div ref={targetRef} className="relative left-1/2 mt-20 h-[880vh] w-screen -translate-x-1/2">
       <div className="sticky top-[57px] h-[calc(100svh-57px)] overflow-hidden">
         {profitStructureCards.map((card, index) => (
           <StackCard key={card.problem} card={card} index={index} progress={scrollYProgress} />
@@ -224,6 +236,15 @@ function ScrollStack() {
       </div>
     </div>
   );
+}
+
+function ScrollStack() {
+  const shouldReduceMotion = useReducedMotion();
+  const canRunScrollStack = useCanRunScrollStack();
+
+  if (shouldReduceMotion || !canRunScrollStack) return <StaticStack />;
+
+  return <AnimatedScrollStack />;
 }
 
 export function ProfitStructureSection() {

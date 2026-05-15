@@ -1,13 +1,40 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          void video.play().catch(() => undefined);
+          return;
+        }
+
+        video.pause();
+      },
+      { threshold: 0.08 },
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section className="relative h-dvh min-h-[720px] overflow-hidden bg-[#0E0907] text-white sm:min-h-[760px] lg:min-h-[820px]">
       {/* 불꽃 배경 영상 */}
       <video
+        ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover object-top"
         style={{ zIndex: 0 }}
         autoPlay
@@ -78,16 +105,7 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
           >
-            <motion.div
-              animate={{
-                filter: [
-                  'drop-shadow(0 24px 56px rgba(200, 50, 0, 0.35))',
-                  'drop-shadow(0 32px 80px rgba(225, 75, 0, 0.68))',
-                  'drop-shadow(0 24px 56px rgba(200, 50, 0, 0.35))',
-                ],
-              }}
-              transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: 1.6 }}
-            >
+            <div className="drop-shadow-[0_28px_72px_rgba(225,75,0,0.5)]">
               <Image
                 src="/asset/sec-1/main-bowl.webp"
                 alt="심곱도리탕 메인 메뉴"
@@ -96,7 +114,7 @@ export function HeroSection() {
                 priority
                 className="h-auto w-[300px] max-w-[78vw] sm:w-[330px] md:w-[410px] lg:w-[470px] xl:w-[520px]"
               />
-            </motion.div>
+            </div>
           </motion.div>
 
           <motion.span

@@ -1,7 +1,8 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import type { CSSProperties } from 'react';
+import { useRef, type CSSProperties } from 'react';
+import { useInView } from 'framer-motion';
 
 type AmbientTypeTickerLine = {
   text: string;
@@ -32,22 +33,18 @@ const toneStyles = {
   red: {
     solid: 'rgba(255,48,71,0.56)',
     stroke: '1px rgba(255,48,71,0.82)',
-    shadow: 'drop-shadow(0 0 18px rgba(255,48,71,0.22))',
   },
   ember: {
     solid: 'rgba(238,83,35,0.48)',
     stroke: '1px rgba(238,83,35,0.78)',
-    shadow: 'drop-shadow(0 0 18px rgba(238,83,35,0.2))',
   },
   gold: {
     solid: 'rgba(214,168,79,0.42)',
     stroke: '1px rgba(214,168,79,0.72)',
-    shadow: 'drop-shadow(0 0 16px rgba(214,168,79,0.16))',
   },
   muted: {
     solid: 'rgba(245,233,201,0.2)',
     stroke: '1px rgba(245,233,201,0.32)',
-    shadow: 'drop-shadow(0 0 12px rgba(245,233,201,0.08))',
   },
 } as const;
 
@@ -82,11 +79,9 @@ function getTickerTextStyle({
     ? {
         WebkitTextStroke: colors.stroke,
         color: 'transparent',
-        filter: colors.shadow,
       }
     : {
         color: colors.solid,
-        filter: colors.shadow,
       };
 }
 
@@ -101,7 +96,9 @@ function TickerLine({
   size: NonNullable<AmbientTypeTickerProps['size']>;
   tone: NonNullable<AmbientTypeTickerProps['tone']>;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(ref, { amount: 0.08 });
   const isOutline = line.variant === 'outline';
   const duration = 30 + index * 7 + (size === 'large' ? 8 : 0);
   const animateX = line.direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'];
@@ -119,13 +116,14 @@ function TickerLine({
 
   return (
     <div
+      ref={ref}
       className={[
         'overflow-hidden font-(family-name:--font-black-han-sans) leading-none tracking-normal whitespace-nowrap uppercase',
         sizeClasses[size],
       ].join(' ')}
       style={textStyle}
     >
-      {shouldReduceMotion ? (
+      {shouldReduceMotion || !isInView ? (
         <div className="flex w-max">{content}</div>
       ) : (
         <motion.div
@@ -152,7 +150,9 @@ function VerticalTickerLine({
   size: NonNullable<AmbientTypeTickerProps['size']>;
   tone: NonNullable<AmbientTypeTickerProps['tone']>;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(ref, { amount: 0.08 });
   const isOutline = line.variant === 'outline';
   const duration = 38 + index * 8 + (size === 'large' ? 10 : 0);
   const animateY = line.direction === 'up' ? ['0%', '-50%'] : ['-50%', '0%'];
@@ -173,13 +173,14 @@ function VerticalTickerLine({
 
   return (
     <div
+      ref={ref}
       className={[
         'h-full overflow-hidden font-(family-name:--font-black-han-sans) leading-none tracking-normal whitespace-nowrap uppercase',
         sizeClasses[size],
       ].join(' ')}
       style={textStyle}
     >
-      {shouldReduceMotion ? (
+      {shouldReduceMotion || !isInView ? (
         <div className="flex h-max flex-col items-center">{content}</div>
       ) : (
         <motion.div

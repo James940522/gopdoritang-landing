@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { menus, type MenuItem } from '@domains/landing/model';
 import { AmbientVerticalTicker } from './ambient-type-ticker';
 
@@ -58,8 +58,10 @@ function MenuCard({ item, index }: { item: MenuItem; index: number }) {
 }
 
 export function MenuSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const isSectionInView = useInView(sectionRef, { amount: 0.12 });
   const dragState = useRef<DragState>({
     isDown: false,
     startX: 0,
@@ -68,7 +70,7 @@ export function MenuSection() {
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    if (shouldReduceMotion || isDragging) return;
+    if (shouldReduceMotion || isDragging || !isSectionInView) return;
 
     const intervalId = window.setInterval(() => {
       const scroller = scrollerRef.current;
@@ -87,7 +89,7 @@ export function MenuSection() {
     }, AUTO_SLIDE_DELAY_MS);
 
     return () => window.clearInterval(intervalId);
-  }, [isDragging, shouldReduceMotion]);
+  }, [isDragging, isSectionInView, shouldReduceMotion]);
 
   const scrollCarousel = (direction: -1 | 1) => {
     const scroller = scrollerRef.current;
@@ -132,6 +134,7 @@ export function MenuSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="menu"
       className="relative isolate overflow-hidden bg-[var(--color-surface-900)] py-24 text-white sm:py-32 lg:py-40"
     >
