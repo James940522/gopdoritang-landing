@@ -11,14 +11,24 @@ export function FloatingActionButtons() {
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > SHOW_AFTER_SCROLL);
+    let frameId = 0;
+
+    const updateVisibility = () => {
+      frameId = 0;
+      const nextVisible = window.scrollY > SHOW_AFTER_SCROLL;
+      setIsVisible((current) => (current === nextVisible ? current : nextVisible));
     };
 
-    handleScroll();
+    const handleScroll = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(updateVisibility);
+    };
+
+    updateVisibility();
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);

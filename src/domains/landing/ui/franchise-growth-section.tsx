@@ -137,7 +137,7 @@ export function FranchiseGrowthSection() {
         className="absolute inset-x-0 bottom-[214px] -z-10 h-12 -skew-y-2 bg-[var(--color-red-700)] sm:bottom-[252px]"
       />
       <AmbientTypeTicker
-        className="absolute inset-x-0 top-16 z-0 opacity-55 sm:top-20"
+        className="absolute inset-x-0 top-20 z-0 hidden opacity-55 sm:block"
         gap="tight"
         lines={[
           {

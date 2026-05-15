@@ -13,11 +13,10 @@ export function ContactSection() {
           fill
           sizes="100vw"
           className="-z-30 object-cover object-center"
-          unoptimized
         />
         <div aria-hidden className="absolute inset-0 -z-20 bg-black/30" />
         <AmbientTypeTicker
-          className="absolute inset-x-0 top-16 z-0 opacity-45 sm:top-20"
+          className="absolute inset-x-0 top-20 z-0 hidden opacity-45 sm:block"
           gap="tight"
           lines={[
             {

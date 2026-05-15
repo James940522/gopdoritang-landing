@@ -1,8 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef, type CSSProperties } from 'react';
-import { useInView } from 'framer-motion';
 
 type AmbientTypeTickerLine = {
   text: string;
