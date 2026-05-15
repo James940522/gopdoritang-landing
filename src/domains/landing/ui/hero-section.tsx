@@ -64,17 +64,14 @@ export function HeroSection() {
           aria-hidden
         >
           <div
-            className="flex flex-col items-center gap-3 sm:hidden"
-            style={{ WebkitTextStroke: '1.8px #FFD9A0' }}
+            className="flex flex-col items-center gap-5 sm:hidden"
+            style={{ WebkitTextStroke: '2px #FFD9A0' }}
           >
-            <p className="font-(family-name:--font-pol-sensibility) text-[70px] leading-[0.82] text-[#FFD9A0]">
+            <p className="font-(family-name:--font-pol-sensibility) text-[92px] leading-[0.76] text-[#FFD9A0] min-[390px]:text-[100px]">
               프리미엄
             </p>
-            <p className="font-(family-name:--font-pol-sensibility) text-[70px] leading-[0.82] text-[#FFD9A0]">
-              곱도리탕의
-            </p>
-            <p className="font-(family-name:--font-pol-sensibility) text-[78px] leading-[0.82] text-[#FFD9A0]">
-              기준
+            <p className="font-(family-name:--font-pol-sensibility) text-[56px] leading-[0.82] whitespace-nowrap text-[#FFD9A0] min-[390px]:text-[62px]">
+              곱도리탕의 기준
             </p>
           </div>
 
@@ -100,7 +97,7 @@ export function HeroSection() {
           </motion.span>
 
           <motion.div
-            className="col-start-2 justify-self-center"
+            className="col-span-full justify-self-center sm:col-span-1 sm:col-start-2"
             initial={{ opacity: 0, scale: 0.88, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
@@ -112,7 +109,7 @@ export function HeroSection() {
                 width={600}
                 height={540}
                 priority
-                className="h-auto w-[300px] max-w-[78vw] sm:w-[330px] md:w-[410px] lg:w-[470px] xl:w-[520px]"
+                className="h-auto w-[clamp(340px,44svh,440px)] max-w-[92vw] sm:w-[330px] sm:max-w-[78vw] md:w-[410px] lg:w-[470px] xl:w-[520px]"
               />
             </div>
           </motion.div>
