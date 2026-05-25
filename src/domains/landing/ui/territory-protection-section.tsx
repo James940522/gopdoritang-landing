@@ -1,7 +1,5 @@
-'use client';
-
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { RevealArticle, RevealFigure, RevealHeader } from '@shared/ui/reveal';
 import { territoryProtection } from '../model';
 import { AmbientVerticalTicker } from './ambient-type-ticker';
 
@@ -16,7 +14,7 @@ function ComparisonCard({
   const isSafe = tone === 'safe';
 
   return (
-    <motion.article
+    <RevealArticle
       initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
@@ -49,7 +47,7 @@ function ComparisonCard({
       <p className="mt-4 font-(family-name:--font-noto-sans-kr) text-sm leading-[1.75] font-bold break-keep text-[var(--color-beige-300)] sm:text-base">
         {description}
       </p>
-    </motion.article>
+    </RevealArticle>
   );
 }
 
@@ -98,7 +96,7 @@ export function TerritoryProtectionSection() {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">
-        <motion.header
+        <RevealHeader
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
@@ -114,7 +112,7 @@ export function TerritoryProtectionSection() {
           <p className="mx-auto mt-7 max-w-4xl font-(family-name:--font-noto-sans-kr) text-base leading-[1.85] font-bold break-keep text-[var(--color-beige-300)] sm:text-lg">
             {territoryProtection.description}
           </p>
-        </motion.header>
+        </RevealHeader>
 
         <div className="mt-12 grid gap-5 lg:mt-16 lg:grid-cols-[0.86fr_1.14fr] lg:items-stretch">
           <div className="grid gap-5">
@@ -123,7 +121,7 @@ export function TerritoryProtectionSection() {
             ))}
           </div>
 
-          <motion.figure
+          <RevealFigure
             initial={{ opacity: 0, y: 34, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.25 }}
@@ -152,7 +150,7 @@ export function TerritoryProtectionSection() {
                 심 곱도리탕: 배달 구역 보장
               </span>
             </figcaption>
-          </motion.figure>
+          </RevealFigure>
         </div>
 
         <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-xs leading-[1.7] font-bold break-keep text-[var(--color-beige-500)]">

@@ -1,140 +1,9 @@
-'use client';
-
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
-import { franchiseBenefitRows, type FranchiseBenefitRow } from '../model';
+import { RevealDiv, RevealHeader, RevealTr } from '@shared/ui/reveal';
+import { franchiseBenefitRows } from '../model';
+import { BenefitAmountCell } from './franchise-benefit-amount-cell';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-function AmountCell({
-  amount,
-  index,
-  size = 'default',
-}: {
-  amount: FranchiseBenefitRow['amount'];
-  index: number;
-  size?: 'default' | 'compact' | 'mobile';
-}) {
-  const shouldReduceMotion = useReducedMotion();
-  const isCompact = size === 'compact';
-  const isMobile = size === 'mobile';
-
-  if (amount === 'waived') {
-    const stampDelay = 0.1 + index * 0.055;
-
-    return (
-      <motion.div
-        className="flex justify-center"
-        initial={shouldReduceMotion ? false : { opacity: 0 }}
-        whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1 }}
-        viewport={{ once: true, amount: 0.35 }}
-      >
-        <motion.span
-          aria-label="무상 혜택"
-          initial={
-            shouldReduceMotion
-              ? false
-              : {
-                  opacity: 0,
-                  y: -8,
-                  scale: 2.15,
-                  rotate: -18,
-                  filter: 'blur(2px)',
-                }
-          }
-          whileInView={{
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            rotate: -7,
-            filter: 'blur(0px)',
-          }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={
-            shouldReduceMotion
-              ? { duration: 0 }
-              : {
-                  type: 'spring',
-                  stiffness: 620,
-                  damping: 17,
-                  mass: 0.7,
-                  delay: stampDelay,
-                }
-          }
-          className={[
-            'relative grid place-items-center border-2 border-[color:var(--color-red-500)] bg-[rgba(215,38,61,0.08)] font-(family-name:--font-black-han-sans) leading-none text-[var(--color-red-500)] shadow-[0_18px_34px_-22px_rgba(215,38,61,0.95)]',
-            isMobile
-              ? 'h-8 w-[48px] rounded-[5px] min-[380px]:h-9 min-[380px]:w-[56px]'
-              : isCompact
-                ? 'h-10 w-[66px] rounded-[5px] md:h-11 md:w-[74px]'
-                : 'h-11 w-[72px] rounded-[5px] sm:h-[58px] sm:w-[96px] sm:rounded-md',
-          ].join(' ')}
-        >
-          <motion.span
-            aria-hidden
-            className="absolute -inset-1 rounded-[7px] border border-[color:var(--color-red-400)]/65"
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.7 }}
-            whileInView={
-              shouldReduceMotion
-                ? { opacity: 0 }
-                : {
-                    opacity: [0, 0.72, 0],
-                    scale: [0.72, 1.08, 1.22],
-                  }
-            }
-            viewport={{ once: true, amount: 0.35 }}
-            transition={
-              shouldReduceMotion
-                ? { duration: 0 }
-                : {
-                    duration: 0.42,
-                    delay: stampDelay + 0.08,
-                    ease: EASE,
-                  }
-            }
-          />
-          <span
-            aria-hidden
-            className="absolute inset-1 rounded-[4px] border border-[color:var(--color-red-500)]/80 sm:rounded-[5px]"
-          />
-          <span
-            aria-hidden
-            className={
-              isMobile
-                ? 'text-[20px] min-[380px]:text-[23px]'
-                : isCompact
-                  ? 'text-[24px] md:text-[27px]'
-                  : 'text-[26px] sm:text-[34px]'
-            }
-          >
-            無
-          </span>
-        </motion.span>
-      </motion.div>
-    );
-  }
-
-  const label = {
-    self: '자율 시공 가능',
-    purchase: '필요한 만큼만 구입',
-    consult: '상담시 안내',
-  }[amount];
-
-  return (
-    <span
-      className={[
-        'block font-(family-name:--font-black-han-sans) leading-[1.15] break-keep text-[var(--color-beige-100)]',
-        isMobile
-          ? 'text-[9.5px] min-[380px]:text-[10.5px]'
-          : isCompact
-            ? 'text-[13px] md:text-base'
-            : 'text-sm sm:text-2xl sm:leading-none',
-      ].join(' ')}
-    >
-      {label}
-    </span>
-  );
-}
 
 function DesktopBenefitTable() {
   return (
@@ -155,7 +24,7 @@ function DesktopBenefitTable() {
         </thead>
         <tbody>
           {franchiseBenefitRows.map((row, index) => (
-            <motion.tr
+            <RevealTr
               key={row.category}
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -175,9 +44,9 @@ function DesktopBenefitTable() {
                 ) : null}
               </td>
               <td className="bg-[var(--color-surface-800)] px-6 py-6 text-center align-middle">
-                <AmountCell amount={row.amount} index={index} />
+                <BenefitAmountCell amount={row.amount} index={index} />
               </td>
-            </motion.tr>
+            </RevealTr>
           ))}
           <tr>
             <td
@@ -215,7 +84,7 @@ function TabletBenefitTable() {
         </thead>
         <tbody>
           {franchiseBenefitRows.map((row, index) => (
-            <motion.tr
+            <RevealTr
               key={row.category}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -235,9 +104,9 @@ function TabletBenefitTable() {
                 ) : null}
               </td>
               <td className="bg-[var(--color-surface-800)] px-3 py-5 text-center align-middle">
-                <AmountCell amount={row.amount} index={index} size="compact" />
+                <BenefitAmountCell amount={row.amount} index={index} size="compact" />
               </td>
-            </motion.tr>
+            </RevealTr>
           ))}
           <tr>
             <td
@@ -277,7 +146,7 @@ function MobileBenefitTable() {
         ))}
       </div>
       {franchiseBenefitRows.map((row, index) => (
-        <motion.div
+        <RevealDiv
           key={row.category}
           role="row"
           initial={{ opacity: 0, y: 18 }}
@@ -311,9 +180,9 @@ function MobileBenefitTable() {
             role="cell"
             className="grid place-items-center bg-[var(--color-surface-800)] px-1 py-3.5 text-center"
           >
-            <AmountCell amount={row.amount} index={index} size="mobile" />
+            <BenefitAmountCell amount={row.amount} index={index} size="mobile" />
           </div>
-        </motion.div>
+        </RevealDiv>
       ))}
       <div role="row" className="grid grid-cols-[1fr_23%]">
         <div
@@ -350,7 +219,7 @@ export function FranchiseBenefitSection() {
       <div aria-hidden className="absolute inset-0 -z-20 bg-black/15" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8">
-        <motion.header
+        <RevealHeader
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
@@ -371,9 +240,9 @@ export function FranchiseBenefitSection() {
             심 곱도리탕은 불필요한 초기 비용을 줄이고, 점주님 상황에 맞춰 준비할 수 있도록 창업
             항목을 투명하게 안내합니다.
           </p>
-        </motion.header>
+        </RevealHeader>
 
-        <motion.div
+        <RevealDiv
           initial={{ opacity: 0, y: 34, scale: 0.98 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -383,7 +252,7 @@ export function FranchiseBenefitSection() {
           <DesktopBenefitTable />
           <TabletBenefitTable />
           <MobileBenefitTable />
-        </motion.div>
+        </RevealDiv>
 
         <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-xs leading-[1.7] font-black text-white/85 [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
           * 계약 조건 및 시점에 따라 혜택 내용은 달라질 수 있습니다. 계약이행보증금은 별도 안내되며

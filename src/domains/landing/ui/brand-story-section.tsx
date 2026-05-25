@@ -1,7 +1,5 @@
-'use client';
-
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { RevealArticle, RevealHeader } from '@shared/ui/reveal';
 import { brandStories } from '../model';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -41,7 +39,7 @@ export function BrandStorySection() {
 
       <div className="relative mx-auto w-full max-w-3xl px-5 sm:px-8 md:max-w-7xl">
         {/* 섹션 헤더 */}
-        <motion.header
+        <RevealHeader
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -56,12 +54,12 @@ export function BrandStorySection() {
             <br />
             <span className="text-[#FFD9A0]">정직한 마음</span>
           </h2>
-        </motion.header>
+        </RevealHeader>
 
         {/* 3개 카드 — 모바일 1열 / md 이상 가로 3열 */}
         <div className="grid grid-cols-1 items-stretch gap-6 sm:gap-8 md:grid-cols-3 md:gap-6 lg:gap-8">
           {brandStories.map((story, idx) => (
-            <motion.article
+            <RevealArticle
               key={story.index}
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +92,7 @@ export function BrandStorySection() {
                   </p>
                 ))}
               </div>
-            </motion.article>
+            </RevealArticle>
           ))}
         </div>
       </div>
