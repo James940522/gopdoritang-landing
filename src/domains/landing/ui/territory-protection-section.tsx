@@ -152,11 +152,6 @@ export function TerritoryProtectionSection() {
             </figcaption>
           </RevealFigure>
         </div>
-
-        <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-xs leading-[1.7] font-bold break-keep text-[var(--color-beige-500)]">
-          * 상권 및 배달 구역은 지역, 계약 조건, 배달 플랫폼 운영 환경에 따라 세부 기준이 달라질 수
-          있습니다.
-        </p>
       </div>
     </section>
   );

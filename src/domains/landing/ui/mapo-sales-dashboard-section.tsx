@@ -13,13 +13,17 @@ const CHART_PADDING_TOP = 52;
 const CHART_PADDING_BOTTOM = 78;
 const CHART_INNER_WIDTH = CHART_WIDTH - CHART_PADDING_X * 2;
 const CHART_INNER_HEIGHT = CHART_HEIGHT - CHART_PADDING_TOP - CHART_PADDING_BOTTOM;
-const maxSales = Math.max(...mapoMonthlySalesSummary.map((item) => item.totalSales));
+const maxTotalSales = Math.max(...mapoMonthlySalesSummary.map((item) => item.totalSales));
+const minTotalSales = Math.min(...mapoMonthlySalesSummary.map((item) => item.totalSales));
+const totalSalesRange = maxTotalSales - minTotalSales || 1;
+const LINE_CHART_INSET_Y = 28;
+const LINE_CHART_HEIGHT = CHART_INNER_HEIGHT - LINE_CHART_INSET_Y * 2;
 
 const monthlySalesLinePoints = mapoMonthlySalesSummary.map((item, index) => {
   const slotWidth = CHART_INNER_WIDTH / mapoMonthlySalesSummary.length;
   const x = CHART_PADDING_X + slotWidth * index + slotWidth / 2;
-  const totalHeight = (item.totalSales / maxSales) * CHART_INNER_HEIGHT;
-  const y = CHART_PADDING_TOP + CHART_INNER_HEIGHT - totalHeight + 16;
+  const progress = (item.totalSales - minTotalSales) / totalSalesRange;
+  const y = CHART_PADDING_TOP + LINE_CHART_INSET_Y + LINE_CHART_HEIGHT * (1 - progress);
 
   return { x, y };
 });
@@ -187,7 +191,7 @@ function MonthlySalesChart() {
             const slotWidth = CHART_INNER_WIDTH / mapoMonthlySalesSummary.length;
             const barWidth = 82;
             const x = CHART_PADDING_X + slotWidth * index + (slotWidth - barWidth) / 2;
-            const totalHeight = (item.totalSales / maxSales) * CHART_INNER_HEIGHT;
+            const totalHeight = (item.totalSales / maxTotalSales) * CHART_INNER_HEIGHT;
             const baeminHeight = (item.baeminSales / item.totalSales) * totalHeight;
             const coupangHeight = totalHeight - baeminHeight;
             const baseY = CHART_PADDING_TOP + CHART_INNER_HEIGHT;
@@ -244,6 +248,7 @@ function MonthlySalesChart() {
             strokeWidth={4}
             strokeLinecap="round"
             strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true, amount: 0.35 }}
