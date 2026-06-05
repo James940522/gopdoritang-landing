@@ -147,36 +147,22 @@ function MonthlyChart() {
           />
 
           {/* line — 좌측 끝/우측 끝까지 자연스럽게 펼치기 위해 시작/끝 보조선 추가 */}
-          <motion.path
+          <path
             d={`M0,${points[0].y} L${pathD.slice(1)} L${W},${points[points.length - 1].y}`}
             stroke="url(#sales-line)"
             strokeWidth={4}
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1.6, ease: EASE, delay: 0.4 }}
+            vectorEffect="non-scaling-stroke"
           />
 
           {/* dots */}
-          {points.map((p, i) => (
-            <motion.g
-              key={p.month}
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{
-                duration: 0.4,
-                delay: 1.2 + i * 0.15,
-                ease: EASE,
-              }}
-              style={{ transformOrigin: `${p.x}px ${p.y}px` }}
-            >
+          {points.map((p) => (
+            <g key={p.month}>
               <circle cx={p.x} cy={p.y} r={12} fill="#E11D1D" opacity={0.25} />
               <circle cx={p.x} cy={p.y} r={7} fill="#FFD9A0" stroke="#E11D1D" strokeWidth={3} />
-            </motion.g>
+            </g>
           ))}
         </svg>
 

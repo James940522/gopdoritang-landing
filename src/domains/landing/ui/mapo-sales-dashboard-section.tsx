@@ -198,13 +198,7 @@ function MonthlySalesChart() {
             const topY = baseY - totalHeight;
 
             return (
-              <motion.g
-                key={item.month}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.65, delay: 0.12 + index * 0.11, ease: EASE }}
-              >
+              <g key={item.month}>
                 <rect
                   x={x}
                   y={topY}
@@ -237,43 +231,32 @@ function MonthlySalesChart() {
                 >
                   {item.month}
                 </text>
-              </motion.g>
+              </g>
             );
           })}
 
-          <motion.path
+          <path
             d={monthlySalesPath}
             fill="none"
-            stroke="var(--color-wood-300)"
+            stroke="#C99D70"
             strokeWidth={4}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
           />
 
           {monthlySalesLinePoints.map((point, index) => (
-            <motion.g
-              key={`${mapoMonthlySalesSummary[index].month}-total-line`}
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.4, delay: 0.92 + index * 0.1, ease: EASE }}
-              style={{ transformOrigin: `${point.x}px ${point.y}px` }}
-            >
+            <g key={`${mapoMonthlySalesSummary[index].month}-total-line`}>
               <circle cx={point.x} cy={point.y} r={13} fill="rgba(201,157,112,0.22)" />
               <circle
                 cx={point.x}
                 cy={point.y}
                 r={7}
-                fill="var(--color-wood-300)"
-                stroke="var(--color-surface-900)"
+                fill="#C99D70"
+                stroke="#0F0C0A"
                 strokeWidth={3}
               />
-            </motion.g>
+            </g>
           ))}
         </svg>
       </div>
