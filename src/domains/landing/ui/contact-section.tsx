@@ -70,16 +70,6 @@ export function ContactSection() {
               <dt className="sr-only">대표자</dt>
               <dd>대표 : {companyInfo.representative}</dd>
             </div>
-            <div>
-              <dt className="sr-only">법인등록번호</dt>
-              <dd>법인등록번호 : {companyInfo.corporateNumber}</dd>
-            </div>
-            <div>
-              <dt className="sr-only">업태와 종목</dt>
-              <dd>
-                업태 : {companyInfo.businessType} · 종목 : {companyInfo.businessItem}
-              </dd>
-            </div>
             <div className="basis-full">
               <dt className="sr-only">주소</dt>
               <dd>주소 : {companyInfo.address}</dd>
