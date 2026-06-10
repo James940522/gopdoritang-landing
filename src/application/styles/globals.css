@@ -141,6 +141,34 @@
     overflow-wrap: break-word;
     /* 줄 길이를 균형 있게 맞춰주는 balance — 짧은 카피일수록 효과가 큼 */
     text-wrap: balance;
+    cursor:
+      url('/asset/cursor/cursor.png') 4 1,
+      auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    cursor:
+      url('/asset/cursor/cursor.png') 4 1,
+      auto;
+  }
+
+  input:not([type='submit']):not([type='button']):not([type='checkbox']):not([type='radio']),
+  textarea {
+    cursor:
+      url('/asset/cursor/text.png') 7 15,
+      text !important;
+  }
+
+  html:active,
+  body:active,
+  body:active *,
+  *:active,
+  *:active * {
+    cursor:
+      url('/asset/cursor/click.png') 4 1,
+      auto !important;
   }
 
   /* 짧은 헤딩 류는 줄간 길이를 균형 있게 잡아주는 balance 적용 */
