@@ -23,10 +23,4 @@ export const OG_IMAGES: SiteOgImage[] = [
     height: OG_IMAGE_HEIGHT,
     alt: '심 곱도리탕 메뉴가 함께 차려진 프리미엄 한식 상차림 이미지',
   },
-  {
-    url: absoluteUrl('/seo/og-secondary.jpg'),
-    width: OG_IMAGE_WIDTH,
-    height: OG_IMAGE_HEIGHT,
-    alt: '붉은 테이블 위에 차려진 심 곱도리탕 메뉴 라인업',
-  },
 ];
