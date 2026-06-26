@@ -332,7 +332,7 @@ function PlatformShare() {
       </div>
 
       <p className="mt-5 font-(family-name:--font-noto-sans-kr) text-xs leading-[1.75] font-medium text-white/45">
-        * 마포본점 2026년 1월부터 4월까지의 배달앱 매출 데이터 기준입니다. 매출은 상권, 운영 방식,
+        * 마포본점 2026년 1월부터 5월까지의 배달앱 매출 데이터 기준입니다. 매출은 상권, 운영 방식,
         배달앱 환경에 따라 달라질 수 있습니다.
       </p>
     </motion.aside>
@@ -368,30 +368,30 @@ export function MapoSalesDashboardSection() {
               REAL SALES DATA
             </p>
             <h2 className="font-(family-name:--font-black-han-sans) text-4xl leading-[1.06] text-white sm:text-6xl md:text-7xl">
-              마포본점 4개월 연속
+              마포본점 5개월 연속
               <br />
               <span className="text-[var(--color-beige-100)]">월매출 1억 이상</span>
             </h2>
           </div>
           <p className="max-w-2xl font-(family-name:--font-noto-sans-kr) text-base leading-[1.8] font-bold text-[var(--color-beige-500)] sm:text-lg lg:justify-self-end">
-            2026년 1월부터 4월까지, 마포본점은 배달앱 기준 월매출 1억 이상 흐름을 이어가고 있습니다.
+            2026년 1월부터 5월까지, 마포본점은 배달앱 기준 월매출 1억 이상 흐름을 이어가고 있습니다.
             창업 판단에 필요한 실제 매출 흐름을 한눈에 볼 수 있도록 정리했습니다.
           </p>
         </motion.header>
 
         <div className="mt-12 grid gap-4 lg:mt-16 lg:grid-cols-[1.3fr_0.7fr]">
           <HeroMetric
-            eyebrow="4 MONTH TOTAL SALES"
+            eyebrow="5 MONTH TOTAL SALES"
             value={mapoSalesTotal.totalSales}
             suffix="원"
-            label="2026년 1월-4월 누적 매출"
+            label="2026년 1월-5월 누적 매출"
             featured
           />
           <HeroMetric
             eyebrow="MONTHLY AVERAGE SALES"
             value={averageMonthlySales}
             suffix="원"
-            label="2026년 1월-4월 평균 월매출"
+            label="2026년 1월-5월 평균 월매출"
           />
         </div>
 

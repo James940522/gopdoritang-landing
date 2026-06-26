@@ -1,5 +1,5 @@
 export type MapoMonthlySales = {
-  month: '1월' | '2월' | '3월' | '4월';
+  month: '1월' | '2월' | '3월' | '4월' | '5월';
   baeminSales: number;
   coupangSales: number;
 };
@@ -30,6 +30,11 @@ export const mapoMonthlySales = [
     month: '4월',
     baeminSales: 27279500,
     coupangSales: 96979900,
+  },
+  {
+    month: '5월',
+    baeminSales: 35945000,
+    coupangSales: 88367700,
   },
 ] as const satisfies readonly MapoMonthlySales[];
 

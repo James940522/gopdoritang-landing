@@ -174,7 +174,10 @@ function StackCard({
       className="absolute bottom-0 left-1/2 top-[var(--stack-card-top-mobile)] w-screen -translate-x-1/2 overflow-hidden rounded-t-[28px] border border-[color:var(--color-wood-700)] bg-black shadow-[0_36px_90px_-42px_rgba(0,0,0,0.95)] sm:top-[var(--stack-card-top-desktop)] sm:rounded-t-[42px]"
     >
       <CardVisual card={card} index={index} />
-      <div className="absolute inset-x-0 bottom-0 z-10 px-[clamp(24px,8vw,220px)] pb-[clamp(36px,8vh,112px)]">
+      <div
+        className="absolute inset-x-0 z-10 px-[clamp(24px,8vw,220px)]"
+        style={{ bottom: 'clamp(220px, 34vh, 460px)' }}
+      >
         <div className="mb-5 flex items-center gap-3">
           <span className="grid h-12 w-12 place-items-center rounded-full border-2 border-[color:var(--color-red-500)] bg-black/50 font-(family-name:--font-black-han-sans) text-xl text-[var(--color-red-400)]">
             {String(index + 1).padStart(2, '0')}
