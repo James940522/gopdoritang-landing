@@ -19,16 +19,14 @@ function BranchCard({ branch, index }: { branch: Branch; index: number }) {
       </div>
 
       <div className="relative z-10 flex h-full flex-col justify-between">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="font-(family-name:--font-noto-sans-kr) text-[11px] font-black text-[var(--color-red-400)] sm:text-xs">
-              계약 지점 {String(index + 1).padStart(2, '0')}
-            </p>
-            <p className="mt-2 font-(family-name:--font-black-han-sans) text-3xl leading-none text-white sm:text-4xl">
-              {branch.name}
-            </p>
-          </div>
-          <span className="rounded-md border border-[color:var(--color-wood-500)] px-2.5 py-1 font-(family-name:--font-noto-sans-kr) text-[10px] font-black text-[var(--color-beige-300)] sm:text-[11px]">
+        <div>
+          <p className="font-(family-name:--font-noto-sans-kr) text-[11px] font-black text-[var(--color-red-400)] sm:text-xs">
+            계약 지점 {String(index + 1).padStart(2, '0')}
+          </p>
+          <p className="mt-2 break-keep font-(family-name:--font-black-han-sans) text-2xl leading-tight text-white sm:text-4xl sm:leading-none">
+            {branch.name}
+          </p>
+          <span className="mt-3 inline-flex w-fit rounded-md border border-[color:var(--color-wood-500)] px-2.5 py-1 font-(family-name:--font-noto-sans-kr) text-[10px] font-black text-[var(--color-beige-300)] sm:text-[11px]">
             OPEN
           </span>
         </div>

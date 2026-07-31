@@ -1,4 +1,5 @@
 import { RevealDiv, RevealHeader } from '@shared/ui/reveal';
+import { branches } from '../model';
 import { AmbientTypeTicker } from './ambient-type-ticker';
 import { BranchMarqueeWall } from './franchise-growth-marquee';
 
@@ -48,7 +49,7 @@ export function FranchiseGrowthSection() {
             variant: 'outline',
           },
           {
-            text: 'ONE MONTH TEN CONTRACTS',
+            text: 'LATEST BRANCH NETWORK',
             direction: 'left',
           },
         ]}
@@ -93,7 +94,7 @@ export function FranchiseGrowthSection() {
                 가맹계약
               </p>
               <p className="mt-2 font-(family-name:--font-black-han-sans) text-8xl leading-none text-[var(--color-beige-100)]">
-                10
+                {branches.length}
               </p>
               <p className="mt-1 font-(family-name:--font-black-han-sans) text-4xl leading-none text-[var(--color-red-400)]">
                 건 돌파
