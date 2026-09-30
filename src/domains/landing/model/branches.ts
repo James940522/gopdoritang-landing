@@ -20,4 +20,6 @@ export const branches: Branch[] = [
   { name: '창원 성산구점', status: '오픈 완료' },
   { name: '충주점', status: '오픈 완료' },
   { name: '송파점', status: '오픈 완료' },
+  { name: '예산점', status: '오픈 완료' },
+  { name: '부천점', status: '오픈 완료' },
 ];
