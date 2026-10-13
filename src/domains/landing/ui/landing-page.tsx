@@ -1,3 +1,5 @@
+import { IntroVideoGate } from '@features/intro-video';
+
 import { BrandStorySection } from './brand-story-section';
 import { ContactSection } from './contact-section';
 import { FloatingActionButtons } from './floating-action-buttons';
@@ -13,7 +15,7 @@ import { TerritoryProtectionSection } from './territory-protection-section';
 
 export function LandingPage() {
   return (
-    <>
+    <IntroVideoGate>
       <SiteHeader />
       <main>
         <HeroSection />
@@ -28,6 +30,6 @@ export function LandingPage() {
         <ContactSection />
       </main>
       <FloatingActionButtons />
-    </>
+    </IntroVideoGate>
   );
 }
