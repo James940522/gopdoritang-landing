@@ -98,8 +98,8 @@ export function IntroVideoGate({ children }: { children: ReactNode }) {
   };
 
   const transition = {
-    duration: prefersReducedMotion ? 0.15 : 0.9,
-    ease: [0.76, 0, 0.24, 1] as const,
+    duration: prefersReducedMotion ? 0.15 : 1.8,
+    ease: [0.42, 0, 0.58, 1] as const,
   };
 
   return (
